@@ -1,0 +1,566 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    "Compute", "Storage", "Database", "AI/ML", "Analytics",
+    "Security", "Networking", "DevOps", "Migration", "IoT",
+    "Business Apps", "Contact Center", "Media Services", "Blockchain", "Quantum"
+  ],
+  "services": [
+    {
+      "id": "lambda",
+      "name": "AWS Lambda",
+      "icon": "lambda.svg",
+      "category": "Compute",
+      "tags": ["serverless", "functions", "event-driven", "compute"],
+      "intentKeywords": ["function", "serverless", "code", "run", "execute", "trigger", "event"],
+      "shortDescription": "Run code without provisioning servers",
+      "documentation": "AWS Lambda lets you run code without provisioning or managing servers. You pay only for the compute time you consume. Lambda automatically scales your application by running code in response to triggers.",
+      "billingModel": "Pay per request and compute duration",
+      "costHint": "~$0.20 per 1M requests + $0.0000166667/GB-second",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["api-gateway", "dynamodb", "s3"]
+    },
+    {
+      "id": "ec2",
+      "name": "Amazon EC2",
+      "icon": "ec2.svg",
+      "category": "Compute",
+      "tags": ["compute", "virtual-machine", "server", "instance"],
+      "intentKeywords": ["server", "virtual", "machine", "instance", "compute", "vm", "host"],
+      "shortDescription": "Virtual servers in the cloud",
+      "documentation": "Amazon EC2 provides resizable compute capacity in the cloud. It allows you to launch virtual servers, configure security and networking, and manage storage. EC2 offers various instance types optimized for different use cases.",
+      "billingModel": "Pay per hour or second of instance usage",
+      "costHint": "From $0.0058/hour (t2.nano) to $24+/hour (large instances)",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["ebs", "elb", "auto-scaling"]
+    },
+    {
+      "id": "s3",
+      "name": "Amazon S3",
+      "icon": "s3.svg",
+      "category": "Storage",
+      "tags": ["storage", "object", "bucket", "files", "static"],
+      "intentKeywords": ["storage", "files", "bucket", "object", "store", "upload", "static", "assets", "images"],
+      "shortDescription": "Scalable object storage",
+      "documentation": "Amazon S3 is object storage built to store and retrieve any amount of data. It offers industry-leading durability, availability, performance, security, and virtually unlimited scalability at very low costs.",
+      "billingModel": "Pay per GB stored + requests",
+      "costHint": "~$0.023/GB/month (Standard), $0.0004 per 1K requests",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["cloudfront", "lambda", "glacier"]
+    },
+    {
+      "id": "dynamodb",
+      "name": "Amazon DynamoDB",
+      "icon": "dynamodb.svg",
+      "category": "Database",
+      "tags": ["database", "nosql", "serverless", "key-value"],
+      "intentKeywords": ["database", "nosql", "table", "data", "store", "dynamodb", "key-value"],
+      "shortDescription": "Fast, flexible NoSQL database",
+      "documentation": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. It supports both document and key-value data models.",
+      "billingModel": "Pay per read/write capacity units or on-demand",
+      "costHint": "On-demand: $1.25 per million write units, $0.25 per million read units",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["lambda", "api-gateway", "streams"]
+    },
+    {
+      "id": "api-gateway",
+      "name": "Amazon API Gateway",
+      "icon": "api-gateway.svg",
+      "category": "Networking",
+      "tags": ["api", "rest", "http", "gateway", "serverless"],
+      "intentKeywords": ["api", "rest", "http", "endpoint", "gateway", "route", "backend"],
+      "shortDescription": "Build, deploy, and manage APIs",
+      "documentation": "Amazon API Gateway is a fully managed service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs. It handles traffic management, authorization, and API versioning.",
+      "billingModel": "Pay per API call + data transfer",
+      "costHint": "~$3.50 per million API calls (REST API)",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["lambda", "cognito", "waf"]
+    },
+    {
+      "id": "cloudfront",
+      "name": "Amazon CloudFront",
+      "icon": "cloudfront.svg",
+      "category": "Networking",
+      "tags": ["cdn", "edge", "cache", "distribution", "content"],
+      "intentKeywords": ["cdn", "cache", "edge", "fast", "global", "distribution", "content", "delivery"],
+      "shortDescription": "Global content delivery network",
+      "documentation": "Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds.",
+      "billingModel": "Pay per data transfer + requests",
+      "costHint": "~$0.085/GB (first 10TB), $0.0075 per 10K requests",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["s3", "route53", "waf"]
+    },
+    {
+      "id": "rds",
+      "name": "Amazon RDS",
+      "icon": "rds.svg",
+      "category": "Database",
+      "tags": ["database", "sql", "relational", "mysql", "postgres"],
+      "intentKeywords": ["database", "sql", "relational", "mysql", "postgres", "rds", "db"],
+      "shortDescription": "Managed relational database service",
+      "documentation": "Amazon RDS makes it easy to set up, operate, and scale a relational database in the cloud. It supports MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server with automated backups and patching.",
+      "billingModel": "Pay per instance hour + storage",
+      "costHint": "From $0.017/hour (db.t3.micro) + $0.115/GB/month storage",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["ec2", "lambda", "secrets-manager"]
+    },
+    {
+      "id": "cognito",
+      "name": "Amazon Cognito",
+      "icon": "cognito.svg",
+      "category": "Security",
+      "tags": ["auth", "authentication", "users", "identity", "login"],
+      "intentKeywords": ["auth", "login", "user", "authentication", "identity", "signup", "signin"],
+      "shortDescription": "User authentication and authorization",
+      "documentation": "Amazon Cognito provides authentication, authorization, and user management for web and mobile apps. Users can sign in directly with a username and password or through third parties like Facebook, Google, or Amazon.",
+      "billingModel": "Pay per monthly active user",
+      "costHint": "Free for first 50K MAUs, then $0.0055/MAU",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["api-gateway", "lambda", "amplify"]
+    },
+    {
+      "id": "sqs",
+      "name": "Amazon SQS",
+      "icon": "sqs.svg",
+      "category": "Compute",
+      "tags": ["queue", "messaging", "async", "decoupling"],
+      "intentKeywords": ["queue", "message", "async", "decouple", "sqs", "messaging"],
+      "shortDescription": "Fully managed message queuing",
+      "documentation": "Amazon SQS is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications.",
+      "billingModel": "Pay per million requests",
+      "costHint": "~$0.40 per million requests (Standard)",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["lambda", "sns", "eventbridge"]
+    },
+    {
+      "id": "sns",
+      "name": "Amazon SNS",
+      "icon": "sns.svg",
+      "category": "Compute",
+      "tags": ["notification", "pub-sub", "messaging", "push"],
+      "intentKeywords": ["notification", "push", "alert", "publish", "subscribe", "sns", "message"],
+      "shortDescription": "Pub/sub messaging and notifications",
+      "documentation": "Amazon SNS is a fully managed pub/sub messaging service for application-to-application and application-to-person communication. It supports SMS, email, and push notifications.",
+      "billingModel": "Pay per publish + delivery",
+      "costHint": "~$0.50 per million publishes, SMS varies by country",
+      "hasFreeTier": true,
+      "relatedServiceIds": ["sqs", "lambda", "eventbridge"]
+    },
+    {"id": "eventbridge", "name": "Amazon EventBridge", "icon": "eventbridge.svg", "category": "Compute", "tags": ["events", "serverless", "integration"], "intentKeywords": ["event", "bus", "schedule", "trigger", "integration"], "shortDescription": "Serverless event bus for application integration", "documentation": "Amazon EventBridge is a serverless event bus that connects applications using events from AWS services, SaaS apps, and custom sources.", "billingModel": "Pay per event published", "costHint": "~$1.00 per million events", "hasFreeTier": true, "relatedServiceIds": ["lambda", "sns", "sqs"]},
+    {"id": "kinesis", "name": "Amazon Kinesis", "icon": "kinesis.svg", "category": "Analytics", "tags": ["streaming", "realtime", "data"], "intentKeywords": ["stream", "realtime", "data", "kinesis", "ingest"], "shortDescription": "Real-time data streaming", "documentation": "Amazon Kinesis makes it easy to collect, process, and analyze real-time streaming data for timely insights.", "billingModel": "Pay per shard hour + data", "costHint": "~$0.015/shard/hour + $0.014/GB", "hasFreeTier": false, "relatedServiceIds": ["lambda", "firehose", "analytics"]},
+    {"id": "athena", "name": "Amazon Athena", "icon": "athena.svg", "category": "Analytics", "tags": ["sql", "query", "serverless", "s3"], "intentKeywords": ["query", "sql", "analyze", "athena", "s3"], "shortDescription": "Query S3 data using SQL", "documentation": "Amazon Athena is an interactive query service that makes it easy to analyze data in S3 using standard SQL.", "billingModel": "Pay per TB scanned", "costHint": "~$5.00 per TB scanned", "hasFreeTier": false, "relatedServiceIds": ["s3", "glue", "quicksight"]},
+    {"id": "rekognition", "name": "Amazon Rekognition", "icon": "rekognition.svg", "category": "AI/ML", "tags": ["ai", "vision", "image", "video"], "intentKeywords": ["image", "face", "detect", "recognize", "vision", "ai"], "shortDescription": "Image and video analysis", "documentation": "Amazon Rekognition makes it easy to add image and video analysis to your applications using deep learning.", "billingModel": "Pay per image/minute analyzed", "costHint": "~$1.00 per 1K images", "hasFreeTier": true, "relatedServiceIds": ["s3", "lambda", "sagemaker"]},
+    {"id": "bedrock", "name": "Amazon Bedrock", "icon": "bedrock.svg", "category": "AI/ML", "tags": ["genai", "llm", "foundation-model", "ai"], "intentKeywords": ["genai", "llm", "ai", "chatbot", "bedrock", "claude", "gpt"], "shortDescription": "Foundation models for generative AI", "documentation": "Amazon Bedrock is a fully managed service offering foundation models from leading AI companies via a single API.", "billingModel": "Pay per input/output tokens", "costHint": "Varies by model, ~$0.01-0.02 per 1K tokens", "hasFreeTier": false, "relatedServiceIds": ["lambda", "sagemaker", "kendra"]},
+    {"id": "sagemaker", "name": "Amazon SageMaker", "icon": "sagemaker.svg", "category": "AI/ML", "tags": ["ml", "training", "model", "notebook"], "intentKeywords": ["machine", "learning", "train", "model", "ml", "sagemaker"], "shortDescription": "Build, train, and deploy ML models", "documentation": "Amazon SageMaker is a fully managed service to build, train, and deploy machine learning models at scale.", "billingModel": "Pay for compute + storage", "costHint": "From $0.05/hour (notebooks) to $3+/hour (training)", "hasFreeTier": true, "relatedServiceIds": ["s3", "ecr", "lambda"]},
+    {"id": "ecs", "name": "Amazon ECS", "icon": "ecs.svg", "category": "Compute", "tags": ["container", "docker", "orchestration"], "intentKeywords": ["container", "docker", "ecs", "orchestration"], "shortDescription": "Run containerized applications", "documentation": "Amazon ECS is a fully managed container orchestration service for running Docker containers.", "billingModel": "Pay for underlying EC2 or Fargate", "costHint": "EC2 pricing or Fargate vCPU/memory", "hasFreeTier": true, "relatedServiceIds": ["ecr", "fargate", "elb"]},
+    {"id": "fargate", "name": "AWS Fargate", "icon": "fargate.svg", "category": "Compute", "tags": ["container", "serverless", "docker"], "intentKeywords": ["fargate", "serverless", "container"], "shortDescription": "Serverless compute for containers", "documentation": "AWS Fargate is a serverless compute engine for containers that works with ECS and EKS.", "billingModel": "Pay per vCPU and memory per second", "costHint": "~$0.04/vCPU/hour + $0.004/GB/hour", "hasFreeTier": false, "relatedServiceIds": ["ecs", "eks", "ecr"]},
+    {"id": "ecr", "name": "Amazon ECR", "icon": "ecr.svg", "category": "Compute", "tags": ["container", "registry", "docker"], "intentKeywords": ["registry", "container", "image", "docker", "ecr"], "shortDescription": "Container image registry", "documentation": "Amazon ECR is a fully managed Docker container registry for storing, managing, and deploying container images.", "billingModel": "Pay per GB stored + data transfer", "costHint": "~$0.10/GB/month storage", "hasFreeTier": true, "relatedServiceIds": ["ecs", "eks", "fargate"]},
+    {"id": "eks", "name": "Amazon EKS", "icon": "eks.svg", "category": "Compute", "tags": ["kubernetes", "container", "k8s"], "intentKeywords": ["kubernetes", "k8s", "eks", "cluster"], "shortDescription": "Managed Kubernetes service", "documentation": "Amazon EKS is a managed Kubernetes service to run Kubernetes on AWS without managing the control plane.", "billingModel": "Pay per cluster hour + compute", "costHint": "~$0.10/hour per cluster + node costs", "hasFreeTier": false, "relatedServiceIds": ["ecr", "fargate", "elb"]},
+    {"id": "elb", "name": "Elastic Load Balancing", "icon": "elb.svg", "category": "Networking", "tags": ["load-balancer", "traffic", "scaling"], "intentKeywords": ["load", "balancer", "traffic", "distribute", "elb", "alb"], "shortDescription": "Distribute incoming traffic", "documentation": "Elastic Load Balancing automatically distributes incoming application traffic across multiple targets.", "billingModel": "Pay per hour + LCU", "costHint": "~$0.0225/hour + $0.008/LCU-hour", "hasFreeTier": true, "relatedServiceIds": ["ec2", "ecs", "auto-scaling"]},
+    {"id": "route53", "name": "Amazon Route 53", "icon": "route53.svg", "category": "Networking", "tags": ["dns", "domain", "routing"], "intentKeywords": ["dns", "domain", "route", "routing"], "shortDescription": "Scalable DNS and domain registration", "documentation": "Amazon Route 53 is a highly available and scalable DNS web service for domain registration and routing.", "billingModel": "Pay per hosted zone + queries", "costHint": "~$0.50/hosted zone/month + $0.40/million queries", "hasFreeTier": false, "relatedServiceIds": ["cloudfront", "elb", "s3"]},
+    {"id": "vpc", "name": "Amazon VPC", "icon": "vpc.svg", "category": "Networking", "tags": ["network", "private", "security"], "intentKeywords": ["vpc", "network", "private", "subnet", "security"], "shortDescription": "Isolated cloud network", "documentation": "Amazon VPC lets you provision a logically isolated section of the AWS Cloud with your own virtual network.", "billingModel": "Free (pay for NAT, VPN, etc.)", "costHint": "VPC free, NAT Gateway ~$0.045/hour", "hasFreeTier": true, "relatedServiceIds": ["ec2", "subnet", "security-group"]},
+    {"id": "iam", "name": "AWS IAM", "icon": "iam.svg", "category": "Security", "tags": ["identity", "access", "security", "permissions"], "intentKeywords": ["iam", "permission", "role", "policy", "access", "identity"], "shortDescription": "Identity and access management", "documentation": "AWS IAM enables you to manage access to AWS services and resources securely with users, groups, and roles.", "billingModel": "Free", "costHint": "No charge for IAM", "hasFreeTier": true, "relatedServiceIds": ["cognito", "organizations", "sso"]},
+    {"id": "kms", "name": "AWS KMS", "icon": "kms.svg", "category": "Security", "tags": ["encryption", "keys", "security"], "intentKeywords": ["encrypt", "key", "kms", "security", "crypto"], "shortDescription": "Managed encryption keys", "documentation": "AWS KMS makes it easy to create and manage cryptographic keys for encrypting your data.", "billingModel": "Pay per key + API requests", "costHint": "~$1.00/key/month + $0.03/10K requests", "hasFreeTier": true, "relatedServiceIds": ["s3", "ebs", "secrets-manager"]},
+    {"id": "waf", "name": "AWS WAF", "icon": "waf.svg", "category": "Security", "tags": ["firewall", "security", "protection"], "intentKeywords": ["firewall", "waf", "protect", "security", "ddos"], "shortDescription": "Web application firewall", "documentation": "AWS WAF is a web application firewall that helps protect your web applications from common exploits.", "billingModel": "Pay per web ACL + rules + requests", "costHint": "~$5/month per web ACL + $1/rule", "hasFreeTier": false, "relatedServiceIds": ["cloudfront", "api-gateway", "elb"]},
+    {"id": "secrets-manager", "name": "AWS Secrets Manager", "icon": "secrets-manager.svg", "category": "Security", "tags": ["secrets", "credentials", "security"], "intentKeywords": ["secret", "password", "credential", "rotate"], "shortDescription": "Manage and rotate secrets", "documentation": "AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources.", "billingModel": "Pay per secret + API calls", "costHint": "~$0.40/secret/month + $0.05/10K API calls", "hasFreeTier": false, "relatedServiceIds": ["rds", "lambda", "kms"]},
+    {"id": "cloudwatch", "name": "Amazon CloudWatch", "icon": "cloudwatch.svg", "category": "DevOps", "tags": ["monitoring", "logs", "metrics", "alarms"], "intentKeywords": ["monitor", "log", "metric", "alarm", "cloudwatch"], "shortDescription": "Monitoring and observability", "documentation": "Amazon CloudWatch monitors your AWS resources and applications, collecting metrics, logs, and events.", "billingModel": "Pay per metric, log, alarm", "costHint": "~$0.30/metric/month, $0.50/GB logs ingested", "hasFreeTier": true, "relatedServiceIds": ["lambda", "ec2", "sns"]},
+    {"id": "codepipeline", "name": "AWS CodePipeline", "icon": "codepipeline.svg", "category": "DevOps", "tags": ["ci", "cd", "pipeline", "deployment"], "intentKeywords": ["pipeline", "ci", "cd", "deploy", "automation"], "shortDescription": "Continuous delivery service", "documentation": "AWS CodePipeline is a continuous delivery service for fast and reliable application updates.", "billingModel": "Pay per active pipeline", "costHint": "~$1.00/active pipeline/month", "hasFreeTier": true, "relatedServiceIds": ["codebuild", "codecommit", "codedeploy"]},
+    {"id": "codebuild", "name": "AWS CodeBuild", "icon": "codebuild.svg", "category": "DevOps", "tags": ["build", "ci", "compile"], "intentKeywords": ["build", "compile", "ci", "test"], "shortDescription": "Build and test code", "documentation": "AWS CodeBuild is a fully managed build service that compiles source code, runs tests, and produces packages.", "billingModel": "Pay per build minute", "costHint": "~$0.005/build minute (general1.small)", "hasFreeTier": true, "relatedServiceIds": ["codepipeline", "codecommit", "ecr"]},
+    {"id": "cloudformation", "name": "AWS CloudFormation", "icon": "cloudformation.svg", "category": "DevOps", "tags": ["iac", "infrastructure", "template"], "intentKeywords": ["infrastructure", "template", "iac", "cloudformation", "stack"], "shortDescription": "Infrastructure as code", "documentation": "AWS CloudFormation lets you model and provision AWS resources using templates.", "billingModel": "Free (pay for resources created)", "costHint": "No charge for CloudFormation itself", "hasFreeTier": true, "relatedServiceIds": ["cdk", "sam", "ec2"]},
+    {"id": "step-functions", "name": "AWS Step Functions", "icon": "step-functions.svg", "category": "Compute", "tags": ["workflow", "orchestration", "serverless"], "intentKeywords": ["workflow", "orchestrate", "state", "step"], "shortDescription": "Visual workflow orchestration", "documentation": "AWS Step Functions lets you coordinate multiple AWS services into serverless workflows.", "billingModel": "Pay per state transition", "costHint": "~$0.025 per 1K state transitions", "hasFreeTier": true, "relatedServiceIds": ["lambda", "sns", "sqs"]},
+    {"id": "glue", "name": "AWS Glue", "icon": "glue.svg", "category": "Analytics", "tags": ["etl", "data", "catalog"], "intentKeywords": ["etl", "transform", "catalog", "glue", "data"], "shortDescription": "Serverless data integration", "documentation": "AWS Glue is a serverless data integration service for discovering, preparing, and combining data.", "billingModel": "Pay per DPU-hour", "costHint": "~$0.44/DPU-hour", "hasFreeTier": true, "relatedServiceIds": ["s3", "athena", "redshift"]},
+    {"id": "redshift", "name": "Amazon Redshift", "icon": "redshift.svg", "category": "Analytics", "tags": ["warehouse", "analytics", "sql"], "intentKeywords": ["warehouse", "analytics", "redshift", "bi"], "shortDescription": "Cloud data warehouse", "documentation": "Amazon Redshift is a fast, scalable data warehouse for analyzing data across your data warehouse and data lake.", "billingModel": "Pay per node hour", "costHint": "From $0.25/hour (dc2.large)", "hasFreeTier": true, "relatedServiceIds": ["s3", "glue", "quicksight"]},
+    {"id": "quicksight", "name": "Amazon QuickSight", "icon": "quicksight.svg", "category": "Analytics", "tags": ["bi", "dashboard", "visualization"], "intentKeywords": ["dashboard", "bi", "visualization", "report", "chart"], "shortDescription": "Business intelligence dashboards", "documentation": "Amazon QuickSight is a fast, cloud-powered business intelligence service for building visualizations and dashboards.", "billingModel": "Pay per user/session", "costHint": "~$9-18/user/month or $0.30/session", "hasFreeTier": true, "relatedServiceIds": ["athena", "redshift", "rds"]},
+    {"id": "ebs", "name": "Amazon EBS", "icon": "ebs.svg", "category": "Storage", "tags": ["storage", "block", "volume", "disk"], "intentKeywords": ["disk", "volume", "block", "storage", "ebs"], "shortDescription": "Block storage for EC2", "documentation": "Amazon EBS provides persistent block storage volumes for use with EC2 instances.", "billingModel": "Pay per GB-month provisioned", "costHint": "~$0.10/GB/month (gp3)", "hasFreeTier": true, "relatedServiceIds": ["ec2", "snapshot", "dlm"]},
+    {"id": "efs", "name": "Amazon EFS", "icon": "efs.svg", "category": "Storage", "tags": ["storage", "file", "nfs", "shared"], "intentKeywords": ["file", "shared", "nfs", "efs", "storage"], "shortDescription": "Scalable file storage", "documentation": "Amazon EFS provides a simple, scalable, elastic file system for Linux-based workloads.", "billingModel": "Pay per GB stored", "costHint": "~$0.30/GB/month (Standard)", "hasFreeTier": true, "relatedServiceIds": ["ec2", "lambda", "ecs"]},
+    {"id": "glacier", "name": "Amazon S3 Glacier", "icon": "glacier.svg", "category": "Storage", "tags": ["archive", "backup", "cold-storage"], "intentKeywords": ["archive", "backup", "cold", "glacier", "long-term"], "shortDescription": "Low-cost archive storage", "documentation": "Amazon S3 Glacier is a secure, durable, and low-cost storage class for data archiving and long-term backup.", "billingModel": "Pay per GB stored + retrieval", "costHint": "~$0.004/GB/month (Glacier), retrieval fees vary", "hasFreeTier": false, "relatedServiceIds": ["s3", "backup", "dlm"]},
+    {"id": "amplify", "name": "AWS Amplify", "icon": "amplify.svg", "category": "DevOps", "tags": ["frontend", "mobile", "fullstack", "hosting"], "intentKeywords": ["amplify", "frontend", "mobile", "app", "hosting"], "shortDescription": "Build full-stack web and mobile apps", "documentation": "AWS Amplify is a set of tools and services for building scalable full-stack web and mobile applications.", "billingModel": "Pay for build minutes + hosting", "costHint": "~$0.01/build minute, hosting from $0.15/GB", "hasFreeTier": true, "relatedServiceIds": ["cognito", "appsync", "s3"]},
+    {"id": "appsync", "name": "AWS AppSync", "icon": "appsync.svg", "category": "Compute", "tags": ["graphql", "api", "realtime"], "intentKeywords": ["graphql", "appsync", "realtime", "sync"], "shortDescription": "Managed GraphQL service", "documentation": "AWS AppSync is a managed GraphQL service for building data-driven apps with real-time and offline capabilities.", "billingModel": "Pay per query/mutation + realtime", "costHint": "~$4.00/million queries", "hasFreeTier": true, "relatedServiceIds": ["dynamodb", "lambda", "cognito"]},
+    {"id": "iot-core", "name": "AWS IoT Core", "icon": "iot-core.svg", "category": "IoT", "tags": ["iot", "devices", "mqtt"], "intentKeywords": ["iot", "device", "sensor", "mqtt", "thing"], "shortDescription": "Connect IoT devices to the cloud", "documentation": "AWS IoT Core lets you connect IoT devices to AWS services without managing servers.", "billingModel": "Pay per message + connectivity", "costHint": "~$1.00/million messages", "hasFreeTier": true, "relatedServiceIds": ["lambda", "kinesis", "dynamodb"]},
+    {"id": "connect", "name": "Amazon Connect", "icon": "connect.svg", "category": "Contact Center", "tags": ["contact-center", "call", "support"], "intentKeywords": ["call", "contact", "center", "support", "phone"], "shortDescription": "Cloud contact center", "documentation": "Amazon Connect is an easy-to-use cloud contact center service for customer engagement.", "billingModel": "Pay per minute of usage", "costHint": "~$0.018/minute voice", "hasFreeTier": true, "relatedServiceIds": ["lex", "lambda", "s3"]},
+    {"id": "lex", "name": "Amazon Lex", "icon": "lex.svg", "category": "AI/ML", "tags": ["chatbot", "voice", "nlp"], "intentKeywords": ["chatbot", "voice", "conversation", "lex", "bot"], "shortDescription": "Build conversational interfaces", "documentation": "Amazon Lex provides advanced deep learning for building conversational interfaces using voice and text.", "billingModel": "Pay per request", "costHint": "~$0.004/voice request, $0.00075/text request", "hasFreeTier": true, "relatedServiceIds": ["connect", "lambda", "polly"]},
+    {"id": "polly", "name": "Amazon Polly", "icon": "polly.svg", "category": "AI/ML", "tags": ["speech", "tts", "voice"], "intentKeywords": ["speech", "voice", "tts", "text-to-speech", "polly"], "shortDescription": "Text-to-speech service", "documentation": "Amazon Polly turns text into lifelike speech, allowing you to create applications that talk.", "billingModel": "Pay per character", "costHint": "~$4.00/million characters (standard)", "hasFreeTier": true, "relatedServiceIds": ["lex", "connect", "lambda"]},
+    {"id": "transcribe", "name": "Amazon Transcribe", "icon": "transcribe.svg", "category": "AI/ML", "tags": ["speech", "stt", "transcription"], "intentKeywords": ["transcribe", "speech-to-text", "audio", "stt"], "shortDescription": "Speech-to-text service", "documentation": "Amazon Transcribe is an automatic speech recognition service for adding speech-to-text capability.", "billingModel": "Pay per second of audio", "costHint": "~$0.024/minute", "hasFreeTier": true, "relatedServiceIds": ["s3", "lambda", "comprehend"]},
+    {"id": "comprehend", "name": "Amazon Comprehend", "icon": "comprehend.svg", "category": "AI/ML", "tags": ["nlp", "text", "sentiment"], "intentKeywords": ["nlp", "sentiment", "text", "analyze", "comprehend"], "shortDescription": "Natural language processing", "documentation": "Amazon Comprehend is a natural language processing service for finding insights and relationships in text.", "billingModel": "Pay per unit of text", "costHint": "~$0.0001/unit (100 characters)", "hasFreeTier": true, "relatedServiceIds": ["lambda", "s3", "transcribe"]},
+    {"id": "translate", "name": "Amazon Translate", "icon": "translate.svg", "category": "AI/ML", "tags": ["translation", "language", "ml"], "intentKeywords": ["translate", "language", "translation"], "shortDescription": "Neural machine translation", "documentation": "Amazon Translate is a neural machine translation service for fast, high-quality language translation.", "billingModel": "Pay per character", "costHint": "~$15.00/million characters", "hasFreeTier": true, "relatedServiceIds": ["lambda", "s3", "comprehend"]},
+    {"id": "textract", "name": "Amazon Textract", "icon": "textract.svg", "category": "AI/ML", "tags": ["ocr", "document", "extraction"], "intentKeywords": ["ocr", "document", "extract", "scan", "textract"], "shortDescription": "Extract text from documents", "documentation": "Amazon Textract automatically extracts text, handwriting, and data from scanned documents.", "billingModel": "Pay per page", "costHint": "~$1.50/1K pages (detect text)", "hasFreeTier": true, "relatedServiceIds": ["s3", "lambda", "comprehend"]},
+    {"id": "personalize", "name": "Amazon Personalize", "icon": "personalize.svg", "category": "AI/ML", "tags": ["recommendation", "ml", "personalization"], "intentKeywords": ["recommend", "personalize", "suggestion"], "shortDescription": "Real-time personalization and recommendations", "documentation": "Amazon Personalize enables developers to build applications with real-time personalized recommendations.", "billingModel": "Pay for data + training + inference", "costHint": "~$0.05/GB data + training costs", "hasFreeTier": true, "relatedServiceIds": ["s3", "lambda", "dynamodb"]},
+    {"id": "forecast", "name": "Amazon Forecast", "icon": "forecast.svg", "category": "AI/ML", "tags": ["forecasting", "ml", "prediction"], "intentKeywords": ["forecast", "predict", "time-series"], "shortDescription": "Time-series forecasting", "documentation": "Amazon Forecast is a fully managed service for accurate time-series forecasting using machine learning.", "billingModel": "Pay for data + training + forecasts", "costHint": "~$0.088/1K forecasts", "hasFreeTier": true, "relatedServiceIds": ["s3", "lambda", "quicksight"]},
+    {"id": "auto-scaling", "name": "AWS Auto Scaling", "icon": "auto-scaling.svg", "category": "Compute", "tags": ["scaling", "automation", "capacity"], "intentKeywords": ["scale", "auto", "capacity", "scaling"], "shortDescription": "Automatic resource scaling", "documentation": "AWS Auto Scaling monitors your applications and automatically adjusts capacity to maintain performance.", "billingModel": "Free (pay for scaled resources)", "costHint": "No charge for Auto Scaling itself", "hasFreeTier": true, "relatedServiceIds": ["ec2", "ecs", "dynamodb"]},
+    {"id": "elasticache", "name": "Amazon ElastiCache", "icon": "elasticache.svg", "category": "Database", "tags": ["cache", "redis", "memcached", "in-memory"], "intentKeywords": ["cache", "redis", "memcached", "session", "fast"], "shortDescription": "In-memory caching service", "documentation": "Amazon ElastiCache is a fully managed in-memory caching service supporting Redis and Memcached.", "billingModel": "Pay per node hour", "costHint": "From $0.017/hour (cache.t3.micro)", "hasFreeTier": true, "relatedServiceIds": ["rds", "lambda", "ec2"]},
+    {"id": "documentdb", "name": "Amazon DocumentDB", "icon": "documentdb.svg", "category": "Database", "tags": ["database", "mongodb", "document", "nosql"], "intentKeywords": ["mongodb", "document", "documentdb", "nosql"], "shortDescription": "MongoDB-compatible document database", "documentation": "Amazon DocumentDB is a fast, scalable, highly available MongoDB-compatible document database service.", "billingModel": "Pay per instance hour + storage + I/O", "costHint": "From $0.077/hour (db.t3.medium)", "hasFreeTier": false, "relatedServiceIds": ["dynamodb", "lambda", "ec2"]},
+    {"id": "neptune", "name": "Amazon Neptune", "icon": "neptune.svg", "category": "Database", "tags": ["graph", "database", "relationships"], "intentKeywords": ["graph", "neptune", "relationship", "network"], "shortDescription": "Managed graph database", "documentation": "Amazon Neptune is a fast, reliable, fully managed graph database service for highly connected datasets.", "billingModel": "Pay per instance hour + storage + I/O", "costHint": "From $0.348/hour (db.t3.medium)", "hasFreeTier": false, "relatedServiceIds": ["lambda", "ec2", "sagemaker"]},
+    {"id": "timestream", "name": "Amazon Timestream", "icon": "timestream.svg", "category": "Database", "tags": ["timeseries", "iot", "metrics"], "intentKeywords": ["timeseries", "iot", "metrics", "timestream"], "shortDescription": "Time series database", "documentation": "Amazon Timestream is a fast, scalable, serverless time series database for IoT and operational applications.", "billingModel": "Pay per writes + storage + queries", "costHint": "~$0.50/million writes", "hasFreeTier": true, "relatedServiceIds": ["iot-core", "kinesis", "grafana"]},
+    {"id": "msk", "name": "Amazon MSK", "icon": "msk.svg", "category": "Analytics", "tags": ["kafka", "streaming", "messaging"], "intentKeywords": ["kafka", "msk", "streaming", "message"], "shortDescription": "Managed Apache Kafka", "documentation": "Amazon MSK is a fully managed service for Apache Kafka to build and run streaming data applications.", "billingModel": "Pay per broker hour + storage", "costHint": "From $0.21/hour (kafka.t3.small)", "hasFreeTier": false, "relatedServiceIds": ["kinesis", "lambda", "s3"]},
+    {"id": "opensearch", "name": "Amazon OpenSearch", "icon": "opensearch.svg", "category": "Analytics", "tags": ["search", "elasticsearch", "logs"], "intentKeywords": ["search", "elasticsearch", "opensearch", "logs"], "shortDescription": "Managed search and analytics", "documentation": "Amazon OpenSearch Service makes it easy to deploy, operate, and scale OpenSearch for log analytics and search.", "billingModel": "Pay per instance hour + storage", "costHint": "From $0.036/hour (t3.small.search)", "hasFreeTier": true, "relatedServiceIds": ["cloudwatch", "kinesis", "lambda"]},
+    {"id": "dms", "name": "AWS DMS", "icon": "dms.svg", "category": "Migration", "tags": ["migration", "database", "replication"], "intentKeywords": ["migrate", "database", "dms", "replication"], "shortDescription": "Database migration service", "documentation": "AWS Database Migration Service helps you migrate databases to AWS quickly and securely.", "billingModel": "Pay per replication instance hour", "costHint": "From $0.018/hour (dms.t3.micro)", "hasFreeTier": true, "relatedServiceIds": ["rds", "dynamodb", "s3"]},
+    {"id": "snowball", "name": "AWS Snowball", "icon": "snowball.svg", "category": "Migration", "tags": ["migration", "data-transfer", "physical"], "intentKeywords": ["snowball", "transfer", "physical", "petabyte"], "shortDescription": "Physical data transport", "documentation": "AWS Snowball is a petabyte-scale data transport solution using physical storage devices.", "billingModel": "Pay per job + shipping", "costHint": "~$300/job (Snowball Edge)", "hasFreeTier": false, "relatedServiceIds": ["s3", "glacier", "dms"]},
+    {"id": "workspaces", "name": "Amazon WorkSpaces", "icon": "workspaces.svg", "category": "Business Apps", "tags": ["desktop", "virtual", "workspace"], "intentKeywords": ["desktop", "workspace", "virtual", "remote"], "shortDescription": "Virtual desktop service", "documentation": "Amazon WorkSpaces is a managed desktop computing service for provisioning cloud-based desktops.", "billingModel": "Pay per workspace per month", "costHint": "From $25/month per workspace", "hasFreeTier": false, "relatedServiceIds": ["directory-service", "vpc", "s3"]},
+    {"id": "chime", "name": "Amazon Chime", "icon": "chime.svg", "category": "Contact Center", "tags": ["communication", "video", "meeting"], "intentKeywords": ["meeting", "video", "call", "communication"], "shortDescription": "Communication and collaboration", "documentation": "Amazon Chime is a communications service for online meetings, video conferencing, and business calling.", "billingModel": "Pay per user per day", "costHint": "$3 per user per day (Pro)", "hasFreeTier": true, "relatedServiceIds": ["connect", "workspaces", "s3"]},
+    {"id": "elemental", "name": "AWS Elemental MediaLive", "icon": "elemental.svg", "category": "Media Services", "tags": ["video", "streaming", "broadcast"], "intentKeywords": ["video", "stream", "broadcast", "media"], "shortDescription": "Live video processing", "documentation": "AWS Elemental MediaLive is a broadcast-grade live video processing service for creating high-quality video streams.", "billingModel": "Pay per channel hour", "costHint": "From $1.50/hour per channel", "hasFreeTier": false, "relatedServiceIds": ["s3", "cloudfront", "kinesis"]},
+    {"id": "blockchain", "name": "Amazon Managed Blockchain", "icon": "blockchain.svg", "category": "Blockchain", "tags": ["blockchain", "ledger", "distributed"], "intentKeywords": ["blockchain", "ledger", "distributed", "hyperledger"], "shortDescription": "Managed blockchain networks", "documentation": "Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks.", "billingModel": "Pay per network member", "costHint": "From $30/month per member", "hasFreeTier": false, "relatedServiceIds": ["vpc", "cloudwatch", "iam"]},
+    {"id": "braket", "name": "Amazon Braket", "icon": "braket.svg", "category": "Quantum", "tags": ["quantum", "computing", "research"], "intentKeywords": ["quantum", "computing", "braket", "research"], "shortDescription": "Quantum computing service", "documentation": "Amazon Braket is a fully managed quantum computing service for researchers and developers.", "billingModel": "Pay per task + simulator time", "costHint": "From $0.30 per task", "hasFreeTier": false, "relatedServiceIds": ["s3", "sagemaker", "lambda"]}
+  ],
+  "patterns": [
+    {
+      "id": "serverless-api",
+      "label": "Serverless REST API with Database",
+      "intentKeywords": ["api", "backend", "serverless", "rest", "database", "crud"],
+      "stack": ["api-gateway", "lambda", "dynamodb"],
+      "summary": "Build a scalable REST API without managing servers. Perfect for web and mobile backends with automatic scaling.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "user", "serviceId": "user", "label": "Client", "position": 0},
+          {"id": "apigw", "serviceId": "api-gateway", "label": "API Gateway", "position": 1},
+          {"id": "fn", "serviceId": "lambda", "label": "Lambda", "position": 2},
+          {"id": "db", "serviceId": "dynamodb", "label": "DynamoDB", "position": 3}
+        ],
+        "edges": [
+          {"from": "user", "to": "apigw"},
+          {"from": "apigw", "to": "fn"},
+          {"from": "fn", "to": "db"}
+        ]
+      },
+      "costSummary": "Very low cost for low-medium traffic. Pay only for actual usage.",
+      "costLevel": "Low",
+      "trendTags": ["Serverless", "Event-Driven"],
+      "popularityScore": 95,
+      "difficultyLevel": "Beginner",
+      "estimatedBuildTime": "1-2 days",
+      "prerequisiteKnowledge": ["REST APIs", "JSON", "Basic JavaScript/Python"],
+      "securityNotes": [
+        "Use IAM roles for Lambda, never hardcode credentials",
+        "Enable API Gateway authorization with Cognito or API keys",
+        "Enable DynamoDB encryption at rest"
+      ],
+      "learningResources": [
+        {"title": "AWS Lambda Developer Guide", "url": "https://docs.aws.amazon.com/lambda/", "type": "documentation"},
+        {"title": "Build Serverless API Tutorial", "url": "https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/", "type": "tutorial"}
+      ],
+      "alternativeStack": {
+        "label": "Traditional API (EC2 + RDS)",
+        "services": ["ec2", "rds", "elb"],
+        "costLevel": "Medium",
+        "scalingModel": "Manual/Auto Scaling Groups",
+        "managementOverhead": "High - OS patching, scaling config",
+        "complexity": "Medium"
+      }
+    },
+    {
+      "id": "static-website",
+      "label": "Static Website Hosting",
+      "intentKeywords": ["static", "website", "hosting", "html", "frontend", "web"],
+      "stack": ["s3", "cloudfront", "route53"],
+      "summary": "Host a fast, secure static website with global CDN distribution. Ideal for portfolios, landing pages, and SPAs.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "user", "serviceId": "user", "label": "Visitor", "position": 0},
+          {"id": "cdn", "serviceId": "cloudfront", "label": "CloudFront", "position": 1},
+          {"id": "storage", "serviceId": "s3", "label": "S3 Bucket", "position": 2}
+        ],
+        "edges": [
+          {"from": "user", "to": "cdn"},
+          {"from": "cdn", "to": "storage"}
+        ]
+      },
+      "costSummary": "Extremely low cost. Often under $1/month for small sites.",
+      "costLevel": "Low",
+      "trendTags": ["Serverless", "Edge"],
+      "popularityScore": 90,
+      "difficultyLevel": "Beginner",
+      "estimatedBuildTime": "2-4 hours",
+      "prerequisiteKnowledge": ["HTML/CSS", "Basic DNS concepts"],
+      "securityNotes": [
+        "Enable HTTPS via CloudFront SSL certificate",
+        "Block public S3 access, use CloudFront OAI",
+        "Consider WAF for DDoS protection"
+      ],
+      "learningResources": [
+        {"title": "Host Static Website on S3", "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html", "type": "documentation"},
+        {"title": "CloudFront Distribution Setup", "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.html", "type": "tutorial"}
+      ]
+    },
+    {
+      "id": "ai-image-analysis",
+      "label": "AI Image Analysis Pipeline",
+      "intentKeywords": ["ai", "image", "analysis", "recognition", "ml", "detect", "vision", "photo"],
+      "stack": ["s3", "lambda", "rekognition"],
+      "summary": "Automatically analyze images using AI for object detection, facial analysis, and content moderation.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "upload", "serviceId": "s3", "label": "S3 Upload", "position": 0},
+          {"id": "trigger", "serviceId": "lambda", "label": "Lambda Trigger", "position": 1},
+          {"id": "ai", "serviceId": "rekognition", "label": "Rekognition", "position": 2},
+          {"id": "result", "serviceId": "dynamodb", "label": "Store Results", "position": 3}
+        ],
+        "edges": [
+          {"from": "upload", "to": "trigger"},
+          {"from": "trigger", "to": "ai"},
+          {"from": "ai", "to": "result"}
+        ]
+      },
+      "costSummary": "Pay per image analyzed. Cost-effective for moderate volumes.",
+      "costLevel": "Medium",
+      "trendTags": ["AI/ML", "Serverless", "GenAI"],
+      "popularityScore": 85,
+      "difficultyLevel": "Intermediate",
+      "estimatedBuildTime": "2-3 days",
+      "prerequisiteKnowledge": ["AWS Lambda basics", "S3 events", "JSON processing"],
+      "securityNotes": [
+        "Use IAM roles with least privilege for Rekognition access",
+        "Encrypt S3 bucket with SSE-S3 or SSE-KMS",
+        "Consider data privacy regulations for facial data"
+      ],
+      "learningResources": [
+        {"title": "Amazon Rekognition Developer Guide", "url": "https://docs.aws.amazon.com/rekognition/", "type": "documentation"},
+        {"title": "Build Image Analysis App", "url": "https://aws.amazon.com/rekognition/resources/", "type": "tutorial"}
+      ]
+    },
+    {
+      "id": "realtime-notifications",
+      "label": "Real-time Notifications System",
+      "intentKeywords": ["realtime", "notification", "push", "alert", "websocket", "live"],
+      "stack": ["sns", "sqs", "lambda"],
+      "summary": "Send real-time notifications via SMS, email, or push. Perfect for alerts, updates, and user engagement.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "trigger", "serviceId": "lambda", "label": "Event Source", "position": 0},
+          {"id": "topic", "serviceId": "sns", "label": "SNS Topic", "position": 1},
+          {"id": "queue", "serviceId": "sqs", "label": "SQS Queue", "position": 2},
+          {"id": "process", "serviceId": "lambda", "label": "Process", "position": 3}
+        ],
+        "edges": [
+          {"from": "trigger", "to": "topic"},
+          {"from": "topic", "to": "queue"},
+          {"from": "queue", "to": "process"}
+        ]
+      },
+      "costSummary": "Very low cost. SMS charges vary by country.",
+      "costLevel": "Low",
+      "trendTags": ["Event-Driven", "Serverless", "Real-Time"],
+      "popularityScore": 80,
+      "difficultyLevel": "Beginner",
+      "estimatedBuildTime": "1 day",
+      "prerequisiteKnowledge": ["Event-driven architecture", "JSON"],
+      "securityNotes": [
+        "Use SNS topic policies to restrict publishers",
+        "Enable encryption for SQS queues",
+        "Validate message content before processing"
+      ],
+      "learningResources": [
+        {"title": "Amazon SNS Developer Guide", "url": "https://docs.aws.amazon.com/sns/", "type": "documentation"},
+        {"title": "Fanout Pattern with SNS/SQS", "url": "https://aws.amazon.com/getting-started/hands-on/send-fanout-event-notifications/", "type": "tutorial"}
+      ]
+    },
+    {
+      "id": "data-pipeline",
+      "label": "Data Analytics Pipeline",
+      "intentKeywords": ["data", "pipeline", "analytics", "etl", "warehouse", "bi", "reporting"],
+      "stack": ["kinesis", "lambda", "s3", "athena"],
+      "summary": "Ingest, process, and analyze streaming data. Build dashboards and run SQL queries on your data lake.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "ingest", "serviceId": "kinesis", "label": "Kinesis Stream", "position": 0},
+          {"id": "process", "serviceId": "lambda", "label": "Transform", "position": 1},
+          {"id": "store", "serviceId": "s3", "label": "Data Lake", "position": 2},
+          {"id": "query", "serviceId": "athena", "label": "Athena Query", "position": 3}
+        ],
+        "edges": [
+          {"from": "ingest", "to": "process"},
+          {"from": "process", "to": "store"},
+          {"from": "store", "to": "query"}
+        ]
+      },
+      "costSummary": "Costs scale with data volume. Athena charges per query.",
+      "costLevel": "Medium",
+      "trendTags": ["Data Lake", "Analytics", "Real-Time"],
+      "popularityScore": 75,
+      "difficultyLevel": "Intermediate",
+      "estimatedBuildTime": "3-5 days",
+      "prerequisiteKnowledge": ["SQL", "Data formats (JSON, Parquet)", "ETL concepts"],
+      "securityNotes": [
+        "Encrypt data at rest in S3 and Kinesis",
+        "Use IAM policies to control Athena query access",
+        "Enable CloudTrail for audit logging"
+      ],
+      "learningResources": [
+        {"title": "Amazon Kinesis Developer Guide", "url": "https://docs.aws.amazon.com/kinesis/", "type": "documentation"},
+        {"title": "Build a Data Lake", "url": "https://aws.amazon.com/solutions/implementations/data-lake-solution/", "type": "tutorial"}
+      ]
+    },
+    {
+      "id": "container-app",
+      "label": "Containerized Application",
+      "intentKeywords": ["container", "docker", "kubernetes", "microservice", "ecs", "fargate"],
+      "stack": ["ecr", "ecs", "fargate", "elb"],
+      "summary": "Deploy containerized applications with automatic scaling. Great for microservices architecture.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "user", "serviceId": "user", "label": "Client", "position": 0},
+          {"id": "lb", "serviceId": "elb", "label": "Load Balancer", "position": 1},
+          {"id": "container", "serviceId": "ecs", "label": "ECS/Fargate", "position": 2},
+          {"id": "registry", "serviceId": "ecr", "label": "ECR Registry", "position": 3}
+        ],
+        "edges": [
+          {"from": "user", "to": "lb"},
+          {"from": "lb", "to": "container"},
+          {"from": "registry", "to": "container"}
+        ]
+      },
+      "costSummary": "Pay for compute resources. Fargate simplifies pricing.",
+      "costLevel": "Medium",
+      "trendTags": ["Containers", "Microservices"],
+      "popularityScore": 82,
+      "difficultyLevel": "Intermediate",
+      "estimatedBuildTime": "2-4 days",
+      "prerequisiteKnowledge": ["Docker basics", "Container concepts", "Networking"],
+      "securityNotes": [
+        "Scan container images for vulnerabilities",
+        "Use task IAM roles, not instance roles",
+        "Enable VPC networking for isolation"
+      ],
+      "learningResources": [
+        {"title": "Amazon ECS Developer Guide", "url": "https://docs.aws.amazon.com/ecs/", "type": "documentation"},
+        {"title": "Deploy Containers on AWS", "url": "https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/", "type": "tutorial"}
+      ],
+      "alternativeStack": {
+        "label": "Kubernetes (EKS)",
+        "services": ["eks", "ecr", "elb"],
+        "costLevel": "High",
+        "scalingModel": "Kubernetes HPA/VPA",
+        "managementOverhead": "High - K8s expertise required",
+        "complexity": "Advanced"
+      }
+    },
+    {
+      "id": "genai-chatbot",
+      "label": "Generative AI Chatbot",
+      "intentKeywords": ["genai", "chatbot", "ai", "llm", "bedrock", "conversation", "gpt"],
+      "stack": ["api-gateway", "lambda", "bedrock"],
+      "summary": "Build an AI-powered chatbot using foundation models. Create conversational experiences with generative AI.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "user", "serviceId": "user", "label": "User", "position": 0},
+          {"id": "api", "serviceId": "api-gateway", "label": "API Gateway", "position": 1},
+          {"id": "fn", "serviceId": "lambda", "label": "Lambda", "position": 2},
+          {"id": "ai", "serviceId": "bedrock", "label": "Bedrock LLM", "position": 3}
+        ],
+        "edges": [
+          {"from": "user", "to": "api"},
+          {"from": "api", "to": "fn"},
+          {"from": "fn", "to": "ai"}
+        ]
+      },
+      "costSummary": "Pay per token processed. Costs vary by model.",
+      "costLevel": "Medium",
+      "trendTags": ["GenAI", "AI/ML", "Serverless"],
+      "popularityScore": 92,
+      "difficultyLevel": "Intermediate",
+      "estimatedBuildTime": "2-3 days",
+      "prerequisiteKnowledge": ["REST APIs", "Prompt engineering basics", "JSON"],
+      "securityNotes": [
+        "Implement input validation to prevent prompt injection",
+        "Use IAM to restrict Bedrock model access",
+        "Consider content filtering for responses"
+      ],
+      "learningResources": [
+        {"title": "Amazon Bedrock User Guide", "url": "https://docs.aws.amazon.com/bedrock/", "type": "documentation"},
+        {"title": "Build GenAI Apps Workshop", "url": "https://catalog.workshops.aws/building-with-amazon-bedrock/", "type": "tutorial"}
+      ]
+    },
+    {
+      "id": "user-auth",
+      "label": "User Authentication System",
+      "intentKeywords": ["auth", "login", "signup", "user", "authentication", "oauth", "social"],
+      "stack": ["cognito", "api-gateway", "lambda"],
+      "summary": "Implement secure user authentication with social login support. Manage users without building auth from scratch.",
+      "workflowDiagram": {
+        "nodes": [
+          {"id": "user", "serviceId": "user", "label": "User", "position": 0},
+          {"id": "auth", "serviceId": "cognito", "label": "Cognito", "position": 1},
+          {"id": "api", "serviceId": "api-gateway", "label": "API Gateway", "position": 2},
+          {"id": "fn", "serviceId": "lambda", "label": "Lambda", "position": 3}
+        ],
+        "edges": [
+          {"from": "user", "to": "auth"},
+          {"from": "auth", "to": "api"},
+          {"from": "api", "to": "fn"}
+        ]
+      },
+      "costSummary": "Free for first 50K users. Very cost-effective.",
+      "costLevel": "Low",
+      "trendTags": ["Serverless", "Security"],
+      "popularityScore": 88,
+      "difficultyLevel": "Beginner",
+      "estimatedBuildTime": "1-2 days",
+      "prerequisiteKnowledge": ["OAuth concepts", "JWT tokens", "REST APIs"],
+      "securityNotes": [
+        "Enable MFA for sensitive applications",
+        "Use secure password policies",
+        "Implement proper token validation"
+      ],
+      "learningResources": [
+        {"title": "Amazon Cognito Developer Guide", "url": "https://docs.aws.amazon.com/cognito/", "type": "documentation"},
+        {"title": "Add Auth to Your App", "url": "https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/module-2/", "type": "tutorial"}
+      ]
+    }
+  ],
+  "trendingTopics": [
+    {
+      "id": "genai",
+      "label": "Generative AI & ML",
+      "description": "Build intelligent applications with foundation models, image recognition, and natural language processing.",
+      "relatedPatterns": ["genai-chatbot", "ai-image-analysis"],
+      "icon": "🤖"
+    },
+    {
+      "id": "serverless",
+      "label": "Serverless First",
+      "description": "Build and run applications without managing servers. Pay only for what you use.",
+      "relatedPatterns": ["serverless-api", "static-website", "realtime-notifications"],
+      "icon": "⚡"
+    },
+    {
+      "id": "containers",
+      "label": "Containers & Kubernetes",
+      "description": "Package and deploy applications consistently using Docker containers and orchestration.",
+      "relatedPatterns": ["container-app"],
+      "icon": "📦"
+    },
+    {
+      "id": "realtime",
+      "label": "Real-Time Streaming",
+      "description": "Process and analyze data in real-time for instant insights and actions.",
+      "relatedPatterns": ["realtime-notifications", "data-pipeline"],
+      "icon": "🔴"
+    },
+    {
+      "id": "datalake",
+      "label": "Data Lake & Analytics",
+      "description": "Store, process, and analyze massive amounts of data for business intelligence.",
+      "relatedPatterns": ["data-pipeline"],
+      "icon": "📊"
+    },
+    {
+      "id": "security",
+      "label": "Zero Trust Security",
+      "description": "Implement modern security practices with identity-based access control.",
+      "relatedPatterns": ["user-auth"],
+      "icon": "🔒"
+    },
+    {
+      "id": "edge",
+      "label": "Edge & CDN",
+      "description": "Deliver content and compute at the edge for low latency global performance.",
+      "relatedPatterns": ["static-website"],
+      "icon": "🌐"
+    },
+    {
+      "id": "iot",
+      "label": "IoT Workloads",
+      "description": "Connect, manage, and process data from Internet of Things devices.",
+      "relatedPatterns": ["realtime-notifications", "data-pipeline"],
+      "icon": "📡"
+    }
+  ]
+}

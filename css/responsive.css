@@ -1,0 +1,334 @@
+/* Responsive Design for AWS Beginner Blueprint */
+
+/* Mobile First Approach */
+
+/* Small devices (phones, 576px and up) */
+@media (max-width: 575.98px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .header-content {
+        padding: 0 var(--spacing-md);
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .intent-input {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .trending-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .service-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .cost-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow-flow {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .workflow-arrow {
+        transform: rotate(90deg);
+        margin: var(--spacing-sm) 0;
+    }
+
+    .recommendation-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .pattern-badges {
+        width: 100%;
+    }
+
+    .workflow-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .index-controls {
+        flex-direction: column;
+    }
+
+    .service-search {
+        min-width: unset;
+    }
+
+    .related-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .doc-service-header {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .comparison-table-inner {
+        font-size: 0.875rem;
+    }
+
+    .comparison-table-inner th,
+    .comparison-table-inner td {
+        padding: var(--spacing-sm);
+    }
+
+    .modal-content {
+        margin: var(--spacing-md);
+        padding: var(--spacing-lg);
+        max-height: calc(100vh - 2rem);
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .trending-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cost-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .workflow-flow {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .related-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .trending-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cost-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 992px) {
+    .trending-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .service-cards {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .cost-cards {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .workflow-flow {
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .footer,
+    .nav-btn,
+    .search-btn,
+    .export-btn,
+    .compare-btn,
+    .btn-primary,
+    .btn-secondary {
+        display: none !important;
+    }
+
+    .section {
+        padding: var(--spacing-md) 0;
+        break-inside: avoid;
+    }
+
+    .service-card,
+    .cost-card,
+    .prereq-item {
+        break-inside: avoid;
+    }
+
+    .workflow-diagram {
+        break-inside: avoid;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+
+    .section-title {
+        font-size: 18pt;
+    }
+
+    .pattern-title {
+        font-size: 16pt;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --text-secondary: #000000;
+        --aws-grey: #000000;
+    }
+
+    .service-card,
+    .cost-card,
+    .trending-card {
+        border-width: 2px;
+    }
+
+    .badge {
+        border: 1px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .service-card:hover,
+    .trending-card:hover {
+        transform: none;
+    }
+}
+
+/* Dark mode support (future enhancement) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #FFFFFF;
+        --text-secondary: #D5DBDB;
+        --text-muted: #879596;
+        --bg-primary: #16191F;
+        --bg-secondary: #232F3E;
+        --border-color: #37475A;
+    }
+
+    .service-icon-placeholder,
+    .workflow-node-icon-placeholder {
+        background: var(--aws-orange);
+        color: var(--aws-dark);
+    }
+}
+
+/* Focus styles for accessibility */
+.intent-input:focus,
+.service-search:focus,
+.category-filter:focus,
+.btn-primary:focus,
+.btn-secondary:focus,
+.service-card:focus,
+.trending-card:focus {
+    outline: 2px solid var(--aws-orange);
+    outline-offset: 2px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--aws-orange);
+    color: var(--aws-dark);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1001;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--aws-orange);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error states */
+.error {
+    color: #D32F2F;
+    background: #FFEBEE;
+    border: 1px solid #FFCDD2;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin: var(--spacing-md) 0;
+}
+
+/* Success states */
+.success {
+    color: #2E7D32;
+    background: #E8F5E8;
+    border: 1px solid #C8E6C9;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin: var(--spacing-md) 0;
+}

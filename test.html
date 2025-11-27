@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Beginner Blueprint - Test</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AWS Beginner Blueprint Test</h1>
+        
+        <!-- Test Intent Search -->
+        <div class="search-box">
+            <input type="text" id="intent-input" placeholder="Type: serverless API" />
+            <button id="search-btn">Search</button>
+        </div>
+        <div id="search-hint"></div>
+        
+        <!-- Test Trending Topics -->
+        <div id="trending-grid"></div>
+        
+        <!-- Test Recommendation Panel -->
+        <div id="recommendation-panel" style="display: none;">
+            <h2 id="pattern-title"></h2>
+            <div id="pattern-badges"></div>
+            <p id="pattern-summary"></p>
+            <div id="service-cards"></div>
+            <div id="workflow-diagram"></div>
+        </div>
+        
+        <!-- Test Service Grid -->
+        <div id="service-grid"></div>
+    </div>
+
+    <!-- Load all scripts -->
+    <script src="js/matching.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/workflow-renderer.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/comparison.js"></script>
+    <script src="js/components/badges.js"></script>
+    <script src="js/components/intent-search.js"></script>
+    <script src="js/components/trending-topics.js"></script>
+    <script src="js/components/service-card.js"></script>
+    <script src="js/components/recommendation-panel.js"></script>
+    <script src="js/components/documentation-panel.js"></script>
+    <script src="js/components/service-index.js"></script>
+    
+    <script>
+        // Simple test
+        async function testApp() {
+            try {
+                const response = await fetch('data/knowledge-base.json');
+                const knowledgeBase = await response.json();
+                console.log('Knowledge base loaded:', knowledgeBase);
+                
+                // Test search
+                SearchModule.init(knowledgeBase);
+                const result = SearchModule.searchByIntent('serverless api');
+                console.log('Search result:', result);
+                
+                // Test trending topics
+                TrendingTopicsComponent.init(knowledgeBase, (pattern) => {
+                    console.log('Pattern selected:', pattern);
+                    
+                    // Create services map
+                    const servicesMap = {};
+                    knowledgeBase.services.forEach(service => {
+                        servicesMap[service.id] = service;
+                    });
+                    
+                    RecommendationPanelComponent.render(pattern, servicesMap);
+                });
+                
+                console.log('Test completed successfully');
+            } catch (error) {
+                console.error('Test failed:', error);
+            }
+        }
+        
+        testApp();
+    </script>
+</body>
+</html>

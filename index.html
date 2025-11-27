@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Beginner Blueprint - Intelligent Cloud Service Selector</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">☁️</span>
+                <h1>AWS Beginner Blueprint</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" id="about-btn" aria-label="About this tool">About</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Section 1: Intent Search Input -->
+        <section class="section intent-search-section" id="intent-search">
+            <div class="container">
+                <h2 class="section-title">What do you want to build on AWS?</h2>
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="intent-input" 
+                        class="intent-input"
+                        placeholder="Example: Static website / Backend API / AI Image Analysis / Realtime Notifications / Data Pipeline"
+                        aria-label="Describe what you want to build"
+                    >
+                    <button id="search-btn" class="search-btn" aria-label="Search">
+                        <span>Search</span>
+                    </button>
+                </div>
+                <p class="search-hint" id="search-hint" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <!-- Section 2: Trending Topics -->
+        <section class="section trending-section" id="trending-topics">
+            <div class="container">
+                <h2 class="section-title">🔥 Explore Trending Topics</h2>
+                <div class="trending-grid" id="trending-grid" role="list">
+                    <!-- Trending topic cards will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Recommendation Panel -->
+        <section class="section recommendation-section" id="recommendation-panel" aria-live="polite">
+            <div class="container">
+                <div class="recommendation-header" id="recommendation-header">
+                    <h2 class="pattern-title" id="pattern-title"></h2>
+                    <div class="pattern-badges" id="pattern-badges"></div>
+                </div>
+                <p class="pattern-summary" id="pattern-summary"></p>
+                
+                <!-- Prerequisites Section -->
+                <div class="prerequisites-section" id="prerequisites-section">
+                    <h3>📋 Prerequisites</h3>
+                    <div class="prerequisites-content" id="prerequisites-content"></div>
+                </div>
+
+                <!-- Recommended Stack -->
+                <div class="stack-section" id="stack-section">
+                    <h3>🧩 Recommended Stack</h3>
+                    <div class="service-cards" id="service-cards" role="list"></div>
+                </div>
+
+                <!-- Workflow Diagram -->
+                <div class="workflow-section" id="workflow-section">
+                    <div class="workflow-header">
+                        <h3>📊 Architecture Workflow</h3>
+                        <button id="export-btn" class="export-btn" aria-label="Export diagram as PNG">
+                            📥 Export PNG
+                        </button>
+                        <button id="compare-btn" class="compare-btn" aria-label="Compare with alternative stack">
+                            ⚖️ Compare
+                        </button>
+                    </div>
+                    <div class="workflow-diagram" id="workflow-diagram"></div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="comparison-section" id="comparison-section" hidden>
+                    <h3>⚖️ Stack Comparison</h3>
+                    <div class="comparison-table" id="comparison-table"></div>
+                </div>
+
+                <!-- Cost Guidance -->
+                <div class="cost-section" id="cost-section">
+                    <h3>💰 Cost Guidance</h3>
+                    <div class="cost-cards" id="cost-cards"></div>
+                    <p class="cost-disclaimer">
+                        ⚠️ This is a challenge educational tool using static data. Not real pricing. 
+                        Please check AWS Pricing pages for production workloads.
+                    </p>
+                </div>
+
+                <!-- Security Notes -->
+                <div class="security-section" id="security-section">
+                    <h3>🔒 Security Notes</h3>
+                    <div class="security-notes" id="security-notes"></div>
+                </div>
+
+                <!-- Learning Resources -->
+                <div class="learning-section" id="learning-section">
+                    <h3>📚 Learning Resources</h3>
+                    <div class="learning-links" id="learning-links"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Documentation Panel -->
+        <section class="section documentation-section" id="documentation-panel" hidden>
+            <div class="container">
+                <div class="doc-header">
+                    <button class="doc-close-btn" id="doc-close-btn" aria-label="Close documentation">✕</button>
+                    <div class="doc-service-info" id="doc-service-info"></div>
+                </div>
+                <div class="doc-content" id="doc-content"></div>
+                <div class="related-services" id="related-services">
+                    <h4>Related Services</h4>
+                    <div class="related-cards" id="related-cards"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Service Index Browser -->
+        <section class="section service-index-section" id="service-index">
+            <div class="container">
+                <h2 class="section-title">🗂️ Explore All AWS Services</h2>
+                <div class="index-controls">
+                    <input 
+                        type="text" 
+                        id="service-search" 
+                        class="service-search"
+                        placeholder="Search services..."
+                        aria-label="Search AWS services"
+                    >
+                    <select id="category-filter" class="category-filter" aria-label="Filter by category">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="service-count" id="service-count" aria-live="polite"></div>
+                <div class="service-grid" id="service-grid" role="list"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Modal -->
+    <div class="modal" id="about-modal" role="dialog" aria-labelledby="about-title" aria-hidden="true">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+            <h2 id="about-title">About AWS Beginner Blueprint</h2>
+            <p class="about-purpose">
+                This tool is built for Kairo — AI for Bharat Challenge. It helps students and beginners 
+                choose AWS services quickly with architecture diagrams and high-level cost guidance 
+                using static JSON educational data.
+            </p>
+            <div class="about-features">
+                <h3>Features</h3>
+                <ul>
+                    <li>✔️ Search by use-case or intent</li>
+                    <li>✔️ Search by AWS service name</li>
+                    <li>✔️ Browse trending cloud topics</li>
+                    <li>✔️ Visual architecture workflows</li>
+                    <li>✔️ Export diagrams as PNG</li>
+                    <li>✔️ Compare alternative stacks</li>
+                    <li>✔️ Static cost hints</li>
+                    <li>✔️ 200+ AWS services</li>
+                    <li>✔️ Works fully offline</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="disclaimer">
+                <strong>Disclaimer:</strong> This is an educational prototype created for Kairo AI for Bharat Challenge. 
+                All cost values are static text approximations and may be inaccurate. Not official AWS billing. 
+                Not intended for production financial planning. Check AWS documentation for real pricing.
+            </p>
+            <p class="copyright">© 2025 AWS Beginner Blueprint - Educational Tool</p>
+        </div>
+    </footer>
+
+    <!-- Scripts - Load in dependency order -->
+    <script src="js/matching.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/workflow-renderer.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/comparison.js"></script>
+    <script src="js/components/badges.js"></script>
+    <script src="js/components/service-card.js"></script>
+    <script src="js/components/intent-search.js"></script>
+    <script src="js/components/trending-topics.js"></script>
+    <script src="js/components/recommendation-panel.js"></script>
+    <script src="js/components/documentation-panel.js"></script>
+    <script src="js/components/service-index.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

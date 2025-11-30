@@ -97,6 +97,5 @@ Then open your browser and go to: `http://localhost:8000`
 
 This tool was created for the Kairo AI for Bharat Challenge. It uses static educational data and is not connected to real AWS services or pricing. Always check official AWS documentation for production use.
 
-## License
 
-Educational project - MIT License
+

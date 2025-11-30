@@ -1,0 +1,40 @@
+/* Icon System */
+
+.badge-icon {
+    width: 16px;
+    height: 16px;
+    color: currentColor;
+    flex-shrink: 0;
+}
+
+.feature-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-600);
+    flex-shrink: 0;
+}
+
+.card-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-600);
+}
+
+.service-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Icon hover states */
+.card-interactive:hover .card-icon svg,
+.service-card:hover .service-card-icon svg {
+    color: var(--primary-500);
+    transform: scale(1.1);
+    transition: all var(--transition-fast);
+}

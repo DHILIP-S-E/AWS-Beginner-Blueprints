@@ -1,140 +1,128 @@
-/**
- * Comparison Module - Handles stack comparison functionality
- */
+// Comparison functionality for alternative stacks
+class ComparisonModule {
+    constructor() {
+        this.comparisonData = {
+            'Cost Level': ['Low', 'Medium', 'High'],
+            'Scaling Model': ['Manual', 'Auto', 'Serverless'],
+            'Management Overhead': ['Low', 'Medium', 'High'],
+            'Complexity': ['Beginner', 'Intermediate', 'Advanced']
+        };
+    }
 
-const ComparisonModule = {
-    /**
-     * Check if a pattern has an alternative stack for comparison
-     * @param {Object} pattern - Solution pattern
-     * @returns {Object|null} Comparison data or null
-     */
+    // Check if pattern has alternative stack
     getComparison(pattern) {
-        if (!pattern || !pattern.alternativeStack) {
+        if (!pattern.alternativeStack || pattern.alternativeStack.length === 0) {
             return null;
         }
 
         return {
-            primary: {
-                label: pattern.label,
-                services: pattern.stack,
-                costLevel: pattern.costLevel,
-                scalingModel: 'Auto (Serverless)',
-                managementOverhead: 'Low - Fully managed',
-                complexity: pattern.difficultyLevel
-            },
-            alternative: pattern.alternativeStack,
-            dimensions: [
-                { name: 'Cost Level', key: 'costLevel' },
-                { name: 'Scaling Model', key: 'scalingModel' },
-                { name: 'Management Overhead', key: 'managementOverhead' },
-                { name: 'Complexity', key: 'complexity' }
-            ]
+            primary: pattern,
+            alternative: {
+                stack: pattern.alternativeStack,
+                title: pattern.alternativeTitle || 'Alternative Approach',
+                costLevel: pattern.alternativeCostLevel || pattern.costLevel,
+                difficultyLevel: pattern.alternativeDifficultyLevel || pattern.difficultyLevel
+            }
         };
-    },
-
-    /**
-     * Generate comparison table HTML
-     * @param {Object} primary - Primary stack info
-     * @param {Object} alternative - Alternative stack info
-     * @param {Object[]} dimensions - Comparison dimensions
-     * @returns {HTMLElement} Table element
-     */
-    generateComparisonTable(primary, alternative, dimensions) {
-        const table = document.createElement('table');
-        table.className = 'comparison-table-inner';
-
-        // Header row
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
-        
-        const thDimension = document.createElement('th');
-        thDimension.textContent = 'Dimension';
-        headerRow.appendChild(thDimension);
-
-        const thPrimary = document.createElement('th');
-        thPrimary.innerHTML = `${primary.label} <span class="recommended-badge">Recommended</span>`;
-        thPrimary.className = 'recommended';
-        headerRow.appendChild(thPrimary);
-
-        const thAlternative = document.createElement('th');
-        thAlternative.textContent = alternative.label;
-        headerRow.appendChild(thAlternative);
-
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-
-        // Body rows
-        const tbody = document.createElement('tbody');
-
-        // Services row
-        const servicesRow = document.createElement('tr');
-        servicesRow.innerHTML = `
-            <td><strong>Services</strong></td>
-            <td class="recommended">${primary.services.join(' → ')}</td>
-            <td>${alternative.services.join(' → ')}</td>
-        `;
-        tbody.appendChild(servicesRow);
-
-        // Dimension rows
-        dimensions.forEach(dim => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><strong>${dim.name}</strong></td>
-                <td class="recommended">${primary[dim.key] || '-'}</td>
-                <td>${alternative[dim.key] || '-'}</td>
-            `;
-            tbody.appendChild(row);
-        });
-
-        table.appendChild(tbody);
-        return table;
-    },
-
-    /**
-     * Render comparison section
-     * @param {Object} pattern - Solution pattern
-     * @param {HTMLElement} container - Container element
-     */
-    renderComparison(pattern, container) {
-        const comparison = this.getComparison(pattern);
-        
-        if (!comparison) {
-            container.innerHTML = '<p>No alternative stack available for comparison.</p>';
-            return;
-        }
-
-        container.innerHTML = '';
-        
-        const table = this.generateComparisonTable(
-            comparison.primary,
-            comparison.alternative,
-            comparison.dimensions
-        );
-        
-        container.appendChild(table);
-
-        // Add summary
-        const summary = document.createElement('div');
-        summary.className = 'comparison-summary';
-        summary.innerHTML = `
-            <p><strong>💡 Recommendation:</strong> The ${comparison.primary.label} approach is recommended for this use case 
-            due to lower management overhead and automatic scaling. Consider the alternative if you need 
-            more control over infrastructure or have specific compliance requirements.</p>
-        `;
-        container.appendChild(summary);
-    },
-
-    /**
-     * Check if comparison is available for a pattern
-     * @param {Object} pattern - Solution pattern
-     * @returns {boolean} True if comparison available
-     */
-    hasComparison(pattern) {
-        return pattern && pattern.alternativeStack !== undefined;
     }
-};
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = ComparisonModule;
+    // Generate comparison table
+    generateComparisonTable(comparison) {
+        const { primary, alternative } = comparison;
+        
+        const table = document.createElement('div');
+        table.className = 'comparison-table';
+        table.innerHTML = `
+            <div class="comparison-header">
+                <h3>Stack Comparison</h3>
+                <p>Compare different approaches for this solution</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="comparison-row header-row">
+                    <div class="comparison-cell">Aspect</div>
+                    <div class="comparison-cell recommended">
+                        ${primary.title} (Recommended)
+                    </div>
+                    <div class="comparison-cell">
+                        ${alternative.title}
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Cost Level</div>
+                    <div class="comparison-cell ${primary.costLevel === 'Low' ? 'highlight' : ''}">
+                        ${primary.costLevel}
+                    </div>
+                    <div class="comparison-cell ${alternative.costLevel === 'Low' ? 'highlight' : ''}">
+                        ${alternative.costLevel}
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Scaling Model</div>
+                    <div class="comparison-cell">
+                        ${this.getScalingModel(primary.stack)}
+                    </div>
+                    <div class="comparison-cell">
+                        ${this.getScalingModel(alternative.stack)}
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Management Overhead</div>
+                    <div class="comparison-cell">
+                        ${this.getManagementOverhead(primary.stack)}
+                    </div>
+                    <div class="comparison-cell">
+                        ${this.getManagementOverhead(alternative.stack)}
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Complexity</div>
+                    <div class="comparison-cell ${primary.difficultyLevel === 'Beginner' ? 'highlight' : ''}">
+                        ${primary.difficultyLevel}
+                    </div>
+                    <div class="comparison-cell ${alternative.difficultyLevel === 'Beginner' ? 'highlight' : ''}">
+                        ${alternative.difficultyLevel}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return table;
+    }
+
+    // Determine scaling model based on stack services
+    getScalingModel(stack) {
+        const serverlessServices = ['lambda', 'api-gateway', 'dynamodb', 's3', 'cloudfront'];
+        const autoScalingServices = ['ecs', 'eks', 'auto-scaling', 'application-load-balancer'];
+        
+        const hasServerless = stack.some(service => 
+            serverlessServices.includes(service.toLowerCase())
+        );
+        const hasAutoScaling = stack.some(service => 
+            autoScalingServices.includes(service.toLowerCase())
+        );
+
+        if (hasServerless) return 'Serverless';
+        if (hasAutoScaling) return 'Auto';
+        return 'Manual';
+    }
+
+    // Determine management overhead based on stack services
+    getManagementOverhead(stack) {
+        const lowOverheadServices = ['lambda', 's3', 'dynamodb', 'cloudfront', 'api-gateway'];
+        const highOverheadServices = ['ec2', 'rds', 'eks', 'emr'];
+        
+        const lowCount = stack.filter(service => 
+            lowOverheadServices.includes(service.toLowerCase())
+        ).length;
+        const highCount = stack.filter(service => 
+            highOverheadServices.includes(service.toLowerCase())
+        ).length;
+
+        if (lowCount > highCount) return 'Low';
+        if (highCount > lowCount) return 'High';
+        return 'Medium';
+    }
 }
+
+// Global comparison instance
+window.comparisonModule = new ComparisonModule();

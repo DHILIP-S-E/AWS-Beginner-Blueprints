@@ -3,154 +3,659 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Beginner Blueprint - Intelligent Cloud Service Selector</title>
+    <title>AWS Blueprint - Intelligent Cloud Architecture</title>
+    <meta name="description" content="Professional AWS service selector with intelligent recommendations and visual architecture diagrams">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Design System Foundation -->
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/foundations.css">
+    <!-- Existing Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/pricing.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <!-- Intelligent Search -->
+    <link rel="stylesheet" href="css/intelligent-search.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/service-modal.css">
+    <link rel="stylesheet" href="css/professional-cards.css">
+    <link rel="stylesheet" href="css/fix-display.css">
+    <link rel="stylesheet" href="css/service-listing.css">
+    <link rel="stylesheet" href="css/advanced-features.css">
+    <link rel="stylesheet" href="css/production-complete.css">
+    <link rel="stylesheet" href="css/working-styles.css">
+    <link rel="stylesheet" href="css/smart-suggestions.css">
+    <!-- New Production Features -->
+    <link rel="stylesheet" href="css/visual-builder.css">
+    <link rel="stylesheet" href="css/search-results.css">
+
+    <link rel="stylesheet" href="css/calculator-modal.css">
+    <link rel="stylesheet" href="css/calculator-button-fix.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <span class="logo-icon">☁️</span>
-                <h1>AWS Beginner Blueprint</h1>
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/>
+                        <path d="M8 16L16 12L24 16L16 20L8 16Z" fill="white" opacity="0.7"/>
+                        <path d="M8 20L16 16L24 20L16 24L8 20Z" fill="white" opacity="0.5"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#FF9900"/>
+                                <stop offset="1" stop-color="#FF6B35"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>AWS Blueprint</h1>
+                    <span class="logo-subtitle">Intelligent Architecture</span>
+                </div>
             </div>
             <nav class="nav">
-                <button class="nav-btn" id="about-btn" aria-label="About this tool">About</button>
+                <button class="nav-btn secondary" id="docs-btn">Documentation</button>
+                <button class="nav-btn primary" id="about-btn">About</button>
             </nav>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Section 1: Intent Search Input -->
-        <section class="section intent-search-section" id="intent-search">
+        <!-- Hero Section -->
+        <section class="hero-section page-transition" id="hero">
+            <div class="hero-background">
+                <canvas id="particle-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+                <div class="hero-grid"></div>
+            </div>
             <div class="container">
-                <h2 class="section-title">What do you want to build on AWS?</h2>
-                <div class="search-box">
-                    <input 
-                        type="text" 
-                        id="intent-input" 
-                        class="intent-input"
-                        placeholder="Example: Static website / Backend API / AI Image Analysis / Realtime Notifications / Data Pipeline"
-                        aria-label="Describe what you want to build"
-                    >
-                    <button id="search-btn" class="search-btn" aria-label="Search">
-                        <span>Search</span>
-                    </button>
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1L10.09 5.26L15 6L11 9.74L12.18 15L8 12.27L3.82 15L5 9.74L1 6L5.91 5.26L8 1Z" fill="currentColor"/>
+                        </svg>
+                        <span>AI-Powered Architecture Recommendations</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Build on AWS with
+                        <span class="gradient-text">Confidence</span>
+                    </h1>
+                    <p class="hero-description">
+                        Get intelligent service recommendations, visual architecture diagrams, and cost guidance 
+                        tailored to your project needs. From serverless APIs to ML pipelines.
+                    </p>
+
+                    <div class="search-container">
+                        <div class="search-box">
+                            <div class="search-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="intent-input" 
+                                class="search-input"
+                                placeholder="Describe what you want to build..."
+                                aria-label="Describe what you want to build"
+                            >
+                            <button id="voice-btn" class="voice-btn" aria-label="Voice Search" onclick="startVoiceSearch()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                                </svg>
+                            </button>
+                            <button id="search-btn" class="search-btn" aria-label="Search">
+                                <span>Search</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search-suggestions">
+                            <span class="suggestion-label">Try:</span>
+                            <button class="suggestion-chip">Serverless API</button>
+                            <button class="suggestion-chip">Static Website</button>
+                            <button class="suggestion-chip">ML Pipeline</button>
+                            <button class="suggestion-chip">Real-time Chat</button>
+                        </div>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">AWS Services</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Architecture Patterns</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Free to Use</div>
+                        </div>
+                    </div>
                 </div>
-                <p class="search-hint" id="search-hint" role="status" aria-live="polite"></p>
             </div>
         </section>
 
-        <!-- Section 2: Trending Topics -->
-        <section class="section trending-section" id="trending-topics">
+        <!-- Search Results -->
+        <section class="search-results-section" id="search-results">
             <div class="container">
-                <h2 class="section-title">🔥 Explore Trending Topics</h2>
+                <div class="search-results-header">
+                    <h2 id="search-query-title" class="search-results-title">Search Results</h2>
+                    <button id="close-results" class="close-btn">&times;</button>
+                </div>
+                <div id="search-results-content" class="search-results-grid"></div>
+            </div>
+        </section>
+
+
+
+        <!-- Trending Topics -->
+        <section class="trending-section page-transition" id="trending-topics">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M5.5 2.5C5.5 2.5 6.5 1 8 1C9.5 1 10.5 2.5 10.5 2.5C10.5 2.5 12 3.5 12 5C12 6.5 10.5 7.5 10.5 7.5C10.5 7.5 11.5 9 10 10.5C8.5 12 7 11 7 11C7 11 5.5 12 4 10.5C2.5 9 3.5 7.5 3.5 7.5C3.5 7.5 2 6.5 2 5C2 3.5 3.5 2.5 3.5 2.5C3.5 2.5 4.5 1 5.5 2.5Z" fill="currentColor"/>
+                        </svg>
+                        <span>Trending</span>
+                    </div>
+                    <h2 class="section-title">Popular Architecture Patterns</h2>
+                    <p class="section-description">
+                        Explore the most requested cloud solutions and get started with proven patterns
+                    </p>
+                </div>
                 <div class="trending-grid" id="trending-grid" role="list">
                     <!-- Trending topic cards will be rendered here -->
                 </div>
+                
+                <!-- Advanced Features Demo -->
+
             </div>
         </section>
-
-        <!-- Section 3: Recommendation Panel -->
-        <section class="section recommendation-section" id="recommendation-panel" aria-live="polite">
+    </main>
+    
+    <script>
+        // App.js system handles all search functionality
+        console.log('Using app.js search system');
+    </script>
+    
+    <style>
+        .search-results-section {
+            display: none;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 400px;
+        }
+        
+        .search-results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .search-results-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .close-btn {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+        }
+        
+        .close-btn:hover {
+            background: #f56565;
+            color: white;
+            border-color: #f56565;
+            transform: scale(1.1);
+        }
+        
+        .search-results-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .service-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-card-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .service-card-header:hover {
+            background-color: #f7fafc;
+        }
+        
+        .service-info {
+            flex: 1;
+        }
+        
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .service-description {
+            color: #718096;
+            margin: 0;
+            font-size: 0.875rem;
+        }
+        
+        .expand-icon {
+            font-size: 1.5rem;
+            color: #a0aec0;
+            transition: transform 0.2s ease;
+        }
+        
+        .service-card-header:hover .expand-icon {
+            color: #4299e1;
+            transform: scale(1.2);
+        }
+        
+        .service-details {
+            display: none;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 300px;
+            }
+        }
+        
+        .details-grid {
+            padding: 1.5rem;
+            display: grid;
+            gap: 1.25rem;
+        }
+        
+        .detail-item {
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+        }
+        
+        .detail-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .detail-value {
+            color: #2d3748;
+            margin: 0;
+            font-size: 0.9375rem;
+        }
+        
+        .detail-value.pricing {
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        
+        .detail-value.free-tier {
+            color: #38a169;
+            font-weight: 500;
+        }
+        
+        .cost-summary {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid #38b2ac;
+        }
+        
+        .cost-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .cost-icon {
+            font-size: 1.5rem;
+        }
+        
+        .cost-estimate {
+            font-weight: 600;
+            color: #234e52;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .free-tier-note {
+            color: #234e52;
+            margin: 0;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .search-results-section {
+                padding: 2rem 0;
+            }
+            
+            .search-results-title {
+                font-size: 1.5rem;
+            }
+            
+            .service-card-header {
+                padding: 1rem;
+            }
+            
+            .details-grid {
+                padding: 1rem;
+            }
+        }
+    </style>
+        <!-- Recommendation Panel -->
+        <section class="recommendation-section page-transition" id="recommendation-panel" aria-live="polite">
             <div class="container">
-                <div class="recommendation-header" id="recommendation-header">
+                <div class="recommendation-header">
+                    <div class="recommendation-badge">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1L10.09 5.26L15 6L11 9.74L12.18 15L8 12.27L3.82 15L5 9.74L1 6L5.91 5.26L8 1Z" fill="currentColor"/>
+                        </svg>
+                        <span>Recommended Solution</span>
+                    </div>
                     <h2 class="pattern-title" id="pattern-title"></h2>
                     <div class="pattern-badges" id="pattern-badges"></div>
                 </div>
                 <p class="pattern-summary" id="pattern-summary"></p>
                 
-                <!-- Prerequisites Section -->
-                <div class="prerequisites-section" id="prerequisites-section">
-                    <h3>📋 Prerequisites</h3>
-                    <div class="prerequisites-content" id="prerequisites-content"></div>
+                <div class="recommendation-grid">
+                    <!-- Prerequisites Card -->
+                    <div class="card prerequisites-card" id="prerequisites-section">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>Prerequisites</h3>
+                        </div>
+                        <div class="prerequisites-content" id="prerequisites-content"></div>
+                    </div>
+
+                    <!-- Architecture Card -->
+                    <div class="card architecture-card" id="workflow-section">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M19 14C19 15.1046 18.1046 16 17 16H7C5.89543 16 5 15.1046 5 14V10C5 8.89543 5.89543 8 7 8H17C18.1046 8 19 8.89543 19 10V14Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 8V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M8 4H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h3>Architecture Flow</h3>
+                            <div class="card-actions">
+                                <button id="export-btn" class="btn btn-ghost btn-sm">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5.33333 6.66667L8 4L10.6667 6.66667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 4V10" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Export
+                                </button>
+                                <button id="compare-btn" class="btn btn-ghost btn-sm">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M6 2V14" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 2V14" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 6H6" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 6H14" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 10H6" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 10H14" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Compare
+                                </button>
+                            </div>
+                        </div>
+                        <div class="workflow-diagram" id="workflow-diagram"></div>
+                    </div>
                 </div>
 
-                <!-- Recommended Stack -->
-                <div class="stack-section" id="stack-section">
-                    <h3>🧩 Recommended Stack</h3>
+                <!-- Services Grid -->
+                <div class="card services-card" id="stack-section">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 6C4 4.89543 4.89543 4 6 4H8C9.10457 4 10 4.89543 10 6V8C10 9.10457 9.10457 10 8 10H6C4.89543 10 4 9.10457 4 8V6Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M14 6C14 4.89543 14.8954 4 16 4H18C19.1046 4 20 4.89543 20 6V8C20 9.10457 19.1046 10 18 10H16C14.8954 10 14 9.10457 14 8V6Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M4 16C4 14.8954 4.89543 14 6 14H8C9.10457 14 10 14.8954 10 16V18C10 19.1046 9.10457 20 8 20H6C4.89543 20 4 19.1046 4 18V16Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M14 16C14 14.8954 14.8954 14 16 14H18C19.1046 14 20 14.8954 20 16V18C20 19.1046 19.1046 20 18 20H16C14.8954 20 14 19.1046 14 18V16Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Recommended Services</h3>
+                    </div>
                     <div class="service-cards" id="service-cards" role="list"></div>
                 </div>
 
-                <!-- Workflow Diagram -->
-                <div class="workflow-section" id="workflow-section">
-                    <div class="workflow-header">
-                        <h3>📊 Architecture Workflow</h3>
-                        <button id="export-btn" class="export-btn" aria-label="Export diagram as PNG">
-                            📥 Export PNG
-                        </button>
-                        <button id="compare-btn" class="compare-btn" aria-label="Compare with alternative stack">
-                            ⚖️ Compare
-                        </button>
+                <!-- Additional Info Grid -->
+                <div class="info-grid">
+                    <div class="card cost-card" id="cost-section">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M12 8C12 10.2091 10.2091 12 8 12C5.79086 12 4 10.2091 4 8C4 5.79086 5.79086 4 8 4C10.2091 4 12 5.79086 12 8Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 6V8L9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16 4L20 8L16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>Cost Guidance</h3>
+                        </div>
+                        <div class="cost-cards" id="cost-cards"></div>
+                        <div class="cost-disclaimer">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14.6667C11.6819 14.6667 14.6667 11.6819 14.6667 8C14.6667 4.3181 11.6819 1.33333 8 1.33333C4.3181 1.33333 1.33333 4.3181 1.33333 8C1.33333 11.6819 4.3181 14.6667 8 14.6667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 5.33333V8" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 10.6667H8.00667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Educational estimates only. Check AWS Pricing for production costs.
+                        </div>
                     </div>
-                    <div class="workflow-diagram" id="workflow-diagram"></div>
+
+                    <div class="card security-card" id="security-section">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 2L15 4V9C15 13 10 17 10 17C10 17 5 13 5 9V4L10 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 9L9 10L12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>Security Best Practices</h3>
+                        </div>
+                        <div class="security-notes" id="security-notes"></div>
+                    </div>
+
+                    <div class="card learning-card" id="learning-section">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M4 19.5V4.5C4 3.39543 4.89543 2.5 6 2.5H18C19.1046 2.5 20 3.39543 20 4.5V15.5C20 16.6046 19.1046 17.5 18 17.5H6C4.89543 17.5 4 16.6046 4 15.5V19.5ZM4 19.5C4 18.3954 4.89543 17.5 6 17.5H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>Learning Resources</h3>
+                        </div>
+                        <div class="learning-links" id="learning-links"></div>
+                    </div>
                 </div>
 
-                <!-- Comparison Table -->
-                <div class="comparison-section" id="comparison-section" hidden>
-                    <h3>⚖️ Stack Comparison</h3>
+                <!-- Comparison Section -->
+                <div class="card comparison-card" id="comparison-section" style="display: none;">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M6 2V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 6H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 10H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 10H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 14H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 14H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Stack Comparison</h3>
+                    </div>
                     <div class="comparison-table" id="comparison-table"></div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Cost Guidance -->
-                <div class="cost-section" id="cost-section">
-                    <h3>💰 Cost Guidance</h3>
-                    <div class="cost-cards" id="cost-cards"></div>
-                    <p class="cost-disclaimer">
-                        ⚠️ This is a challenge educational tool using static data. Not real pricing. 
-                        Please check AWS Pricing pages for production workloads.
+        <!-- Service Details Modal -->
+        <div class="service-modal" id="service-modal" role="dialog" aria-hidden="true">
+            <div class="service-modal-overlay" id="service-modal-overlay"></div>
+            <div class="service-modal-content">
+                <div class="service-modal-header">
+                    <div class="service-info">
+                        <div class="service-icon-container">
+                            <img id="service-modal-icon" class="service-modal-icon" alt="">
+                        </div>
+                        <div class="service-details">
+                            <h2 id="service-modal-title"></h2>
+                            <div class="service-meta">
+                                <span id="service-modal-category" class="service-category"></span>
+                                <span id="service-modal-tier" class="service-tier"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="service-modal-close" id="service-modal-close" aria-label="Close">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="service-modal-body">
+                    <div class="service-description">
+                        <p id="service-modal-description"></p>
+                    </div>
+                    
+                    <div class="service-grid">
+                        <div class="service-card">
+                            <div class="service-card-header">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 2C10.5523 2 11 2.44772 11 3V4.26756C13.1652 4.73301 14.7669 6.33474 15.2324 8.5H16.5C17.0523 8.5 17.5 8.94772 17.5 9.5C17.5 10.0523 17.0523 10.5 16.5 10.5H15.2324C14.7669 12.6653 13.1652 14.267 11 14.7324V16C11 16.5523 10.5523 17 10 17C9.44772 17 9 16.5523 9 16V14.7324C6.83474 14.267 5.23301 12.6653 4.76756 10.5H3.5C2.94772 10.5 2.5 10.0523 2.5 9.5C2.5 8.94772 2.94772 8.5 3.5 8.5H4.76756C5.23301 6.33474 6.83474 4.73301 9 4.26756V3C9 2.44772 9.44772 2 10 2ZM10 6C8.34315 6 7 7.34315 7 9C7 10.6569 8.34315 12 10 12C11.6569 12 13 10.6569 13 9C13 7.34315 11.6569 6 10 6Z" fill="currentColor"/>
+                                </svg>
+                                <h3>Pricing</h3>
+                            </div>
+                            <div class="pricing-info" id="service-pricing-info">
+                                <!-- Pricing calculator will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-card-header">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M7 7H13M7 10H11M7 13H13M4 4H16C16.5523 4 17 4.44772 17 5V15C17 15.5523 16.5523 16 16 16H4C3.44772 16 3 15.5523 3 15V5C3 4.44772 3.44772 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                                <h3>Use Cases</h3>
+                            </div>
+                            <div class="use-cases" id="service-use-cases"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="related-services-section">
+                        <h3>Related Services</h3>
+                        <div class="related-services-grid" id="related-services-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Index Browser -->
+        <section class="service-index-section page-transition" id="service-index">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M2 3C2 2.44772 2.44772 2 3 2H6.58579C6.851 2 7.10536 2.10536 7.29289 2.29289L8.70711 3.70711C8.89464 3.89464 9.149 4 9.41421 4H13C13.5523 4 14 4.44772 14 5V12C14 12.5523 13.5523 13 13 13H3C2.44772 13 2 12.5523 2 12V3Z" fill="currentColor"/>
+                        </svg>
+                        <span>Service Directory</span>
+                    </div>
+                    <h2 class="section-title">Explore All AWS Services</h2>
+                    <p class="section-description">
+                        Browse our comprehensive directory of 200+ AWS services organized by category
                     </p>
                 </div>
-
-                <!-- Security Notes -->
-                <div class="security-section" id="security-section">
-                    <h3>🔒 Security Notes</h3>
-                    <div class="security-notes" id="security-notes"></div>
-                </div>
-
-                <!-- Learning Resources -->
-                <div class="learning-section" id="learning-section">
-                    <h3>📚 Learning Resources</h3>
-                    <div class="learning-links" id="learning-links"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Documentation Panel -->
-        <section class="section documentation-section" id="documentation-panel" hidden>
-            <div class="container">
-                <div class="doc-header">
-                    <button class="doc-close-btn" id="doc-close-btn" aria-label="Close documentation">✕</button>
-                    <div class="doc-service-info" id="doc-service-info"></div>
-                </div>
-                <div class="doc-content" id="doc-content"></div>
-                <div class="related-services" id="related-services">
-                    <h4>Related Services</h4>
-                    <div class="related-cards" id="related-cards"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5: Service Index Browser -->
-        <section class="section service-index-section" id="service-index">
-            <div class="container">
-                <h2 class="section-title">🗂️ Explore All AWS Services</h2>
+                
                 <div class="index-controls">
-                    <input 
-                        type="text" 
-                        id="service-search" 
-                        class="service-search"
-                        placeholder="Search services..."
-                        aria-label="Search AWS services"
-                    >
-                    <select id="category-filter" class="category-filter" aria-label="Filter by category">
-                        <option value="">All Categories</option>
-                    </select>
+                    <div class="search-filter-group">
+                        <div class="search-input-group">
+                            <div class="search-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="service-search" 
+                                class="service-search-input"
+                                placeholder="Search services by name or description..."
+                                aria-label="Search AWS services"
+                            >
+                        </div>
+                        <select id="category-filter" class="category-filter" aria-label="Filter by category">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="service-count" id="service-count" aria-live="polite"></div>
                 </div>
-                <div class="service-count" id="service-count" aria-live="polite"></div>
+                
                 <div class="service-grid" id="service-grid" role="list"></div>
             </div>
         </section>
@@ -160,26 +665,136 @@
     <div class="modal" id="about-modal" role="dialog" aria-labelledby="about-title" aria-hidden="true">
         <div class="modal-overlay" id="modal-overlay"></div>
         <div class="modal-content">
-            <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
-            <h2 id="about-title">About AWS Beginner Blueprint</h2>
-            <p class="about-purpose">
-                This tool is built for Kairo — AI for Bharat Challenge. It helps students and beginners 
-                choose AWS services quickly with architecture diagrams and high-level cost guidance 
-                using static JSON educational data.
-            </p>
-            <div class="about-features">
-                <h3>Features</h3>
-                <ul>
-                    <li>✔️ Search by use-case or intent</li>
-                    <li>✔️ Search by AWS service name</li>
-                    <li>✔️ Browse trending cloud topics</li>
-                    <li>✔️ Visual architecture workflows</li>
-                    <li>✔️ Export diagrams as PNG</li>
-                    <li>✔️ Compare alternative stacks</li>
-                    <li>✔️ Static cost hints</li>
-                    <li>✔️ 200+ AWS services</li>
-                    <li>✔️ Works fully offline</li>
-                </ul>
+            <button class="modal-close" id="modal-close" aria-label="Close modal">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <svg width="48" height="48" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#modalGradient)"/>
+                        <path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/>
+                        <path d="M8 16L16 12L24 16L16 20L8 16Z" fill="white" opacity="0.7"/>
+                        <path d="M8 20L16 16L24 20L16 24L8 20Z" fill="white" opacity="0.5"/>
+                        <defs>
+                            <linearGradient id="modalGradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#FF9900"/>
+                                <stop offset="1" stop-color="#FF6B35"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 id="about-title">AWS Blueprint</h2>
+                <p class="modal-subtitle">Intelligent Cloud Architecture Platform</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="about-section">
+                    <h3>About This Project</h3>
+                    <p>
+                        Built for the <strong>Kairo AI for Bharat Challenge</strong>, this platform helps developers 
+                        and students discover the right AWS services for their projects through intelligent 
+                        recommendations and visual architecture patterns.
+                    </p>
+                </div>
+                
+                <div class="about-section">
+                    <h3>Key Features</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <svg class="feature-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="feature-text">
+                                <strong>Intent-Based Search</strong>
+                                <span>Describe what you want to build</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M3 4C3 3.44772 3.44772 3 4 3H16C16.5523 3 17 3.44772 17 4V6C17 6.55228 16.5523 7 16 7H4C3.44772 7 3 6.55228 3 6V4Z" fill="currentColor"/>
+                                <path d="M3 10C3 9.44772 3.44772 9 4 9H16C16.5523 9 17 9.44772 17 10V12C17 12.5523 16.5523 13 16 13H4C3.44772 13 3 12.5523 3 12V10Z" fill="currentColor"/>
+                                <path d="M3 16C3 15.4477 3.44772 15 4 15H16C16.5523 15 17 15.4477 17 16V18C17 18.5523 16.5523 19 16 19H4C3.44772 19 3 18.5523 3 18V16Z" fill="currentColor"/>
+                            </svg>
+                            <div class="feature-text">
+                                <strong>Visual Architecture</strong>
+                                <span>Interactive workflow diagrams</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2C10.5523 2 11 2.44772 11 3V4.26756C13.1652 4.73301 14.7669 6.33474 15.2324 8.5H16.5C17.0523 8.5 17.5 8.94772 17.5 9.5C17.5 10.0523 17.0523 10.5 16.5 10.5H15.2324C14.7669 12.6653 13.1652 14.267 11 14.7324V16C11 16.5523 10.5523 17 10 17C9.44772 17 9 16.5523 9 16V14.7324C6.83474 14.267 5.23301 12.6653 4.76756 10.5H3.5C2.94772 10.5 2.5 10.0523 2.5 9.5C2.5 8.94772 2.94772 8.5 3.5 8.5H4.76756C5.23301 6.33474 6.83474 4.73301 9 4.26756V3C9 2.44772 9.44772 2 10 2ZM10 6C8.34315 6 7 7.34315 7 9C7 10.6569 8.34315 12 10 12C11.6569 12 13 10.6569 13 9C13 7.34315 11.6569 6 10 6Z" fill="currentColor"/>
+                            </svg>
+                            <div class="feature-text">
+                                <strong>Cost Guidance</strong>
+                                <span>Free tier and pricing insights</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2L15 4V9C15 13 10 17 10 17C10 17 5 13 5 9V4L10 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 9L9 10L12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="feature-text">
+                                <strong>Security Best Practices</strong>
+                                <span>Built-in security recommendations</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.33333 6.66667L8 4L10.6667 6.66667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 4V10" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="feature-text">
+                                <strong>Export Diagrams</strong>
+                                <span>Download as PNG images</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M6 2V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 6H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 10H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 10H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="feature-text">
+                                <strong>Stack Comparison</strong>
+                                <span>Compare alternative solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-section">
+                    <h3>Technology Stack</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Vanilla JavaScript</span>
+                        <span class="tech-badge">Modern CSS</span>
+                        <span class="tech-badge">Responsive Design</span>
+                        <span class="tech-badge">Accessibility First</span>
+                        <span class="tech-badge">Progressive Enhancement</span>
+                    </div>
+                </div>
+                
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">AWS Services</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Architecture Patterns</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Open Source</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -187,14 +802,119 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="disclaimer">
-                <strong>Disclaimer:</strong> This is an educational prototype created for Kairo AI for Bharat Challenge. 
-                All cost values are static text approximations and may be inaccurate. Not official AWS billing. 
-                Not intended for production financial planning. Check AWS documentation for real pricing.
-            </p>
-            <p class="copyright">© 2025 AWS Beginner Blueprint - Educational Tool</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="8" fill="url(#footerGradient)"/>
+                            <path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/>
+                            <path d="M8 16L16 12L24 16L16 20L8 16Z" fill="white" opacity="0.7"/>
+                            <path d="M8 20L16 16L24 20L16 24L8 20Z" fill="white" opacity="0.5"/>
+                            <defs>
+                                <linearGradient id="footerGradient" x1="0" y1="0" x2="32" y2="32">
+                                    <stop stop-color="#FF9900"/>
+                                    <stop offset="1" stop-color="#FF6B35"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>AWS Blueprint</span>
+                    </div>
+                    <p class="footer-description">
+                        Intelligent cloud architecture recommendations for modern applications.
+                        Built for the Kiro AI for Bharat Challenge.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Architecture Patterns</a></li>
+                            <li><a href="#">Cost Calculator</a></li>
+                            <li><a href="#">Security Guide</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>AWS Services</h4>
+                        <ul>
+                            <li><a href="#">Compute</a></li>
+                            <li><a href="#">Storage</a></li>
+                            <li><a href="#">Database</a></li>
+                            <li><a href="#">Machine Learning</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li><a href="#">Report Issues</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="disclaimer">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 14.6667C11.6819 14.6667 14.6667 11.6819 14.6667 8C14.6667 4.3181 11.6819 1.33333 8 1.33333C4.3181 1.33333 1.33333 4.3181 1.33333 8C1.33333 11.6819 4.3181 14.6667 8 14.6667Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 5.33333V8" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 10.6667H8.00667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>
+                        <strong>Educational Tool:</strong> This prototype uses static data for learning purposes. 
+                        Cost estimates are approximations. Always consult official AWS documentation for production planning.
+                    </span>
+                </div>
+                <div class="copyright">
+                    <span>© 2025 AWS Blueprint. Built for educational purposes.</span>
+                    <div class="footer-badges">
+                        <span class="footer-badge">Kairo Challenge</span>
+                        <span class="footer-badge">Open Source</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+
+
+
+
+    <style>
+    .voice-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-right: 8px;
+        transition: all 0.2s ease;
+    }
+    
+    .voice-btn:hover {
+        background: #218838;
+        transform: translateY(-1px);
+    }
+    
+    .hero-benefit {
+        color: #38a169;
+        font-weight: 500;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: rgba(56, 161, 105, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid #38a169;
+    }
+    </style>
 
     <!-- Scripts - Load in dependency order -->
     <script src="js/matching.js"></script>
@@ -209,6 +929,29 @@
     <script src="js/components/recommendation-panel.js"></script>
     <script src="js/components/documentation-panel.js"></script>
     <script src="js/components/service-index.js"></script>
+    <script src="js/price-calculator.js"></script>
+    <script src="js/calculator-modal.js"></script>
+    <script src="js/working-features.js"></script>
+    <script src="js/fix-availability-map.js"></script>
+    <script src="js/fix-service-graph.js"></script>
+    <!-- <script src="js/working-features.js"></script> -->
+    <script src="js/question-bank.js"></script>
+    <script src="js/trending-topics.js"></script>
+    <script src="js/smart-suggestions-clean.js"></script>
+    <script src="js/debug-suggestions.js"></script>
+
+    <!-- New Production Features -->
+    <script src="js/particle-background.js"></script>
+    <script src="js/visual-service-builder.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/filter-services-with-icons.js"></script>
+    <script src="js/particles-background.js"></script>
+    <script src="js/fix-calculator.js"></script>
+    <script src="js/150-services-calculator.js"></script>
+    <script src="js/force-calculator-buttons.js"></script>
+    <script src="js/dynamic-search-input.js"></script>
+    
+
+
 </body>
 </html>

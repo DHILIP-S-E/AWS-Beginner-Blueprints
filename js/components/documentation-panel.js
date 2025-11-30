@@ -1,13 +1,12 @@
 /**
- * Documentation Panel Component - Shows service documentation and related services
+ * Service Modal Component - Shows detailed service information in a modal
  */
 
 const DocumentationPanelComponent = {
     knowledgeBase: null,
-    isVisible: false,
 
     /**
-     * Initialize the documentation panel
+     * Initialize the service modal
      * @param {Object} kb - Knowledge base
      */
     init(kb) {
@@ -19,132 +18,156 @@ const DocumentationPanelComponent = {
      * Setup event listeners
      */
     setupEventListeners() {
-        const closeBtn = document.getElementById('doc-close-btn');
+        const modal = document.getElementById('service-modal');
+        const closeBtn = document.getElementById('service-modal-close');
+        const overlay = document.getElementById('service-modal-overlay');
+
         if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                this.hide();
-            });
+            closeBtn.addEventListener('click', () => this.hide());
         }
+
+        if (overlay) {
+            overlay.addEventListener('click', () => this.hide());
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+                this.hide();
+            }
+        });
     },
 
     /**
-     * Show documentation for a service
+     * Show service details in modal
      * @param {Object} service - Service object
      */
     show(service) {
         if (!service) return;
 
-        const panel = document.getElementById('documentation-panel');
-        const serviceInfo = document.getElementById('doc-service-info');
-        const content = document.getElementById('doc-content');
-        const relatedContainer = document.getElementById('related-cards');
+        const modal = document.getElementById('service-modal');
+        if (!modal) return;
 
-        if (!panel || !serviceInfo || !content) return;
+        this.renderServiceDetails(service);
+        this.renderRelatedServices(service);
 
-        // Update service info
-        serviceInfo.innerHTML = `
-            <div class="doc-service-header">
-                <img 
-                    src="assets/icons/${service.icon}" 
-                    alt="${service.name}"
-                    class="doc-service-icon"
-                    onerror="this.style.display='none'"
-                >
-                <div class="doc-service-details">
-                    <h2>${service.name}</h2>
-                    <span class="badge badge-category">${service.category}</span>
-                    ${service.hasFreeTier ? '<span class="badge badge-free-tier">✓ Free Tier</span>' : ''}
-                </div>
-            </div>
-        `;
-
-        // Update content
-        content.innerHTML = `
-            <div class="doc-section">
-                <h3>📖 Overview</h3>
-                <p>${service.documentation}</p>
-            </div>
-            
-            <div class="doc-section">
-                <h3>💰 Billing Model</h3>
-                <p><strong>Model:</strong> ${service.billingModel}</p>
-                <p><strong>Cost Hint:</strong> ${service.costHint}</p>
-                <div class="cost-disclaimer">
-                    ⚠️ This is educational cost guidance only. Check AWS Pricing pages for production workloads.
-                </div>
-            </div>
-
-            <div class="doc-section">
-                <h3>🏷️ Tags & Use Cases</h3>
-                <div class="doc-tags">
-                    ${service.tags ? service.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
-                </div>
-            </div>
-        `;
-
-        // Show related services
-        this.renderRelatedServices(service, relatedContainer);
-
-        // Show panel
-        panel.style.display = 'block';
-        panel.scrollIntoView({ behavior: 'smooth' });
-        this.isVisible = true;
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
     },
 
     /**
-     * Hide the documentation panel
+     * Hide the service modal
      */
     hide() {
-        const panel = document.getElementById('documentation-panel');
-        if (panel) {
-            panel.style.display = 'none';
-            this.isVisible = false;
+        const modal = document.getElementById('service-modal');
+        if (modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
         }
     },
 
     /**
-     * Render related services (max 3)
-     * @param {Object} service - Current service
-     * @param {HTMLElement} container - Container for related services
+     * Render service details
+     * @param {Object} service - Service object
      */
-    renderRelatedServices(service, container) {
+    renderServiceDetails(service) {
+        // Set icon
+        const icon = document.getElementById('service-modal-icon');
+        if (icon) {
+            icon.src = `assets/icons/${service.icon}`;
+            icon.alt = service.name;
+        }
+
+        // Set title
+        const title = document.getElementById('service-modal-title');
+        if (title) title.textContent = service.name;
+
+        // Set category
+        const category = document.getElementById('service-modal-category');
+        if (category) category.textContent = service.category;
+
+        // Set tier info
+        const tier = document.getElementById('service-modal-tier');
+        if (tier) {
+            tier.textContent = service.hasFreeTier ? 'Free Tier Available' : 'Paid Service';
+            tier.className = service.hasFreeTier ? 'service-tier' : 'service-tier paid';
+        }
+
+        // Set description
+        const description = document.getElementById('service-modal-description');
+        if (description) description.textContent = service.documentation || service.shortDescription;
+
+        // Add calculator button to modal header
+        const modalHeader = document.querySelector('.service-modal-header .service-info');
+        if (modalHeader) {
+            // Remove existing calculator button if any
+            const existingBtn = modalHeader.querySelector('.modal-calculator-btn');
+            if (existingBtn) existingBtn.remove();
+            
+            // Add new calculator button
+            const calcBtn = document.createElement('button');
+            calcBtn.className = 'modal-calculator-btn';
+            calcBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="6" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="14" x2="16" y2="14" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Calculator
+            `;
+            calcBtn.onclick = () => openCalculator(service.id);
+            modalHeader.appendChild(calcBtn);
+        }
+
+        // Add pricing calculator
+        const pricingContainer = document.getElementById('service-pricing-info');
+        if (pricingContainer && window.priceCalculator) {
+            pricingContainer.innerHTML = window.priceCalculator.generatePricingHTML(service.id);
+        }
+
+        // Set use cases
+        const useCases = document.getElementById('service-use-cases');
+        if (useCases && service.tags) {
+            useCases.innerHTML = service.tags
+                .map(tag => `<span class="use-case-tag">${tag}</span>`)
+                .join('');
+        }
+    },
+
+    /**
+     * Render related services
+     * @param {Object} service - Service object
+     */
+    renderRelatedServices(service) {
+        const container = document.getElementById('related-services-grid');
         if (!container || !service.relatedServiceIds) return;
 
         container.innerHTML = '';
-
-        const relatedServices = service.relatedServiceIds
-            .slice(0, 3)
-            .map(id => this.knowledgeBase.services.find(s => s.id === id))
-            .filter(Boolean);
-
-        if (relatedServices.length === 0) {
-            container.innerHTML = '<p>No related services found.</p>';
-            return;
-        }
-
-        relatedServices.forEach(relatedService => {
-            const card = this.createRelatedServiceCard(relatedService);
-            container.appendChild(card);
+        
+        service.relatedServiceIds.forEach(serviceId => {
+            const relatedService = this.findServiceById(serviceId);
+            if (relatedService) {
+                const card = this.createRelatedServiceCard(relatedService);
+                container.appendChild(card);
+            }
         });
     },
 
     /**
      * Create a related service card
-     * @param {Object} service - Related service
-     * @returns {HTMLElement} Related service card
+     * @param {Object} service - Service object
+     * @returns {HTMLElement} Card element
      */
     createRelatedServiceCard(service) {
         const card = document.createElement('div');
         card.className = 'related-service-card';
         card.dataset.serviceId = service.id;
-
+        
         card.innerHTML = `
-            <img 
-                src="assets/icons/${service.icon}" 
-                alt="${service.name}"
-                class="related-service-icon"
-                onerror="this.textContent='☁️'"
-            >
+            <img src="assets/icons/${service.icon}" alt="${service.name}" class="related-service-icon">
             <div class="related-service-info">
                 <h4>${service.name}</h4>
                 <p>${service.shortDescription}</p>
@@ -159,12 +182,13 @@ const DocumentationPanelComponent = {
     },
 
     /**
-     * Toggle panel visibility
+     * Find service by ID
+     * @param {string} serviceId - Service ID
+     * @returns {Object|null} Service object or null
      */
-    toggle() {
-        if (this.isVisible) {
-            this.hide();
-        }
+    findServiceById(serviceId) {
+        if (!this.knowledgeBase || !this.knowledgeBase.services) return null;
+        return this.knowledgeBase.services.find(s => s.id === serviceId) || null;
     }
 };
 

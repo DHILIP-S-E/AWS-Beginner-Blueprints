@@ -30,12 +30,34 @@ const MatchingModule = {
 
         let score = 0;
         const patternKeywords = pattern.intentKeywords.map(k => k.toLowerCase());
+        
+        // Add common synonyms for better matching
+        const synonyms = {
+            'ml': ['machine', 'learning', 'model'],
+            'ai': ['artificial', 'intelligence', 'smart'],
+            'deploy': ['deployment', 'host', 'serve'],
+            'frontend': ['web', 'ui', 'interface', 'client'],
+            'backend': ['api', 'server', 'service']
+        };
 
         for (const word of inputWords) {
+            // Direct keyword matching
             for (const keyword of patternKeywords) {
                 if (keyword.includes(word) || word.includes(keyword)) {
                     score++;
                     break;
+                }
+            }
+            
+            // Synonym matching
+            for (const [key, values] of Object.entries(synonyms)) {
+                if (word === key || values.includes(word)) {
+                    for (const keyword of patternKeywords) {
+                        if (keyword === key || values.includes(keyword)) {
+                            score++;
+                            break;
+                        }
+                    }
                 }
             }
         }

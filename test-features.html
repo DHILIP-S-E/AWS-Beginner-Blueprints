@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test New Features - AWS Blueprint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/foundations.css">
+    <link rel="stylesheet" href="css/visual-builder.css">
+    <link rel="stylesheet" href="css/intelligent-search.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: var(--color-neutral-100);
+        }
+        .test-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow-lg);
+        }
+        .test-section h2 {
+            margin-top: 0;
+            color: var(--color-primary-600);
+        }
+        #particle-demo {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, #232F3E 0%, #37475A 100%);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        .demo-text {
+            position: relative;
+            z-index: 10;
+            color: white;
+            text-align: center;
+            padding: var(--space-12);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: var(--color-primary-600); margin-bottom: var(--space-8);">
+            🎉 Test New Features
+        </h1>
+        
+        <!-- Particle Background Test -->
+        <div class="test-section">
+            <h2>1. Particle Background Animation</h2>
+            <p>Move your mouse over the area below to interact with particles:</p>
+            <div id="particle-demo">
+                <canvas id="particle-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+                <div class="demo-text">
+                    <h3>Interactive Particle System</h3>
+                    <p>Move your mouse to see particles react!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Visual Builder Test -->
+        <div class="test-section">
+            <h2>2. Visual Service Builder</h2>
+            <p>Drag AWS services from the left panel onto the canvas. <strong>Now with real AWS service icons!</strong></p>
+            <div id="visual-builder-canvas"></div>
+        </div>
+        
+        <!-- Intelligent Search Test -->
+        <div class="test-section">
+            <h2>3. Intelligent Search</h2>
+            <p>Try typing: "How do I deploy a website?" or "AI/ML" or "S3"</p>
+            <div style="position: relative; max-width: 600px; margin: 0 auto;">
+                <input 
+                    type="text" 
+                    id="test-search" 
+                    placeholder="Search AWS services or ask questions..."
+                    style="width: 100%; padding: var(--space-4); border: 2px solid var(--color-neutral-300); border-radius: var(--radius-lg); font-size: var(--font-size-base);"
+                >
+                <div id="test-suggestions" class="search-suggestions"></div>
+            </div>
+        </div>
+        
+        <!-- Status -->
+        <div class="test-section">
+            <h2>✅ Features Status</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: var(--space-2); border-bottom: 1px solid var(--color-neutral-200);">
+                    <strong>Particle Background:</strong> <span id="status-particles">Loading...</span>
+                </li>
+                <li style="padding: var(--space-2); border-bottom: 1px solid var(--color-neutral-200);">
+                    <strong>Visual Builder:</strong> <span id="status-builder">Loading...</span>
+                </li>
+                <li style="padding: var(--space-2); border-bottom: 1px solid var(--color-neutral-200);">
+                    <strong>Intelligent Search:</strong> <span id="status-search">Loading...</span>
+                </li>
+                <li style="padding: var(--space-2);">
+                    <strong>Lucide Icons:</strong> <span id="status-icons">Loading...</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/particle-background.js"></script>
+    <script src="js/visual-service-builder.js"></script>
+    <script src="js/intelligent-search.js"></script>
+    
+    <script>
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Particle Background
+            const particleCanvas = document.getElementById('particle-canvas');
+            if (particleCanvas && window.ParticleBackground) {
+                ParticleBackground.init(particleCanvas);
+                document.getElementById('status-particles').textContent = '✅ Working!';
+                document.getElementById('status-particles').style.color = 'green';
+            } else {
+                document.getElementById('status-particles').textContent = '❌ Not loaded';
+                document.getElementById('status-particles').style.color = 'red';
+            }
+            
+            // 2. Visual Builder
+            const builderCanvas = document.getElementById('visual-builder-canvas');
+            if (builderCanvas && window.VisualServiceBuilder) {
+                VisualServiceBuilder.init(builderCanvas);
+                document.getElementById('status-builder').textContent = '✅ Working!';
+                document.getElementById('status-builder').style.color = 'green';
+            } else {
+                document.getElementById('status-builder').textContent = '❌ Not loaded';
+                document.getElementById('status-builder').style.color = 'red';
+            }
+            
+            // 3. Intelligent Search
+            const searchInput = document.getElementById('test-search');
+            const suggestionsDiv = document.getElementById('test-suggestions');
+            
+            if (searchInput && window.IntelligentSearch) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value;
+                    if (query.length >= 2) {
+                        const results = IntelligentSearch.search(query);
+                        
+                        if (results.length > 0) {
+                            suggestionsDiv.innerHTML = results.map(result => {
+                                const item = IntelligentSearch.renderSuggestion(result);
+                                return item.outerHTML;
+                            }).join('');
+                            suggestionsDiv.classList.add('active');
+                        } else {
+                            suggestionsDiv.classList.remove('active');
+                        }
+                    } else {
+                        suggestionsDiv.classList.remove('active');
+                    }
+                });
+                
+                document.getElementById('status-search').textContent = '✅ Working!';
+                document.getElementById('status-search').style.color = 'green';
+            } else {
+                document.getElementById('status-search').textContent = '❌ Not loaded';
+                document.getElementById('status-search').style.color = 'red';
+            }
+            
+            // 4. Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+                document.getElementById('status-icons').textContent = '✅ Working!';
+                document.getElementById('status-icons').style.color = 'green';
+            } else {
+                document.getElementById('status-icons').textContent = '❌ Not loaded';
+                document.getElementById('status-icons').style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

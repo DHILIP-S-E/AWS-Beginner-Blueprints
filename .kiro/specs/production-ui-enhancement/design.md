@@ -997,3 +997,406 @@ test('all text has sufficient contrast ratio', () => {
 - Extended component library
 - Advanced data visualization components
 - Internationalization support
+
+
+## Advanced Interactive Features
+
+### Cost Calculator Widget
+
+**Purpose**: Provide users with interactive pricing estimation for AWS services
+
+**Structure**:
+- Widget container with glassmorphism styling
+- Service selector dropdown
+- Usage parameter sliders (requests/month, storage GB, data transfer)
+- Real-time cost display with animated number transitions
+- Monthly/Annual toggle
+- Cost breakdown chart (pie or bar chart)
+- Free tier indicator badge
+- Export/Share button
+
+**Interactions**:
+- Slider drag updates cost in real-time
+- Hover on cost breakdown shows detailed pricing
+- Click on free tier badge shows eligibility details
+- Smooth number counting animation when values change
+
+**Styling**:
+- Card with shadow-lg and rounded corners
+- Primary color accents for sliders
+- Green badge for free tier eligible
+- Animated progress bars for cost breakdown
+
+**Data Model**:
+```javascript
+const costCalculator = {
+  service: 'lambda',
+  parameters: {
+    requests: 1000000,
+    duration: 200,
+    memory: 512
+  },
+  costs: {
+    monthly: 0.20,
+    annual: 2.40,
+    breakdown: {
+      compute: 0.15,
+      requests: 0.05
+    }
+  },
+  freeTier: {
+    eligible: true,
+    remaining: 500000
+  }
+};
+```
+
+### Service Relationship Graph
+
+**Purpose**: Visualize connections and dependencies between AWS services
+
+**Implementation**:
+- Use D3.js or vis.js for force-directed graph
+- Nodes represent services with icons
+- Edges represent relationships (integrates with, depends on, alternative to)
+- Interactive zoom and pan
+- Node clustering by category
+
+**Node Types**:
+- Primary service (larger, highlighted)
+- Related services (medium size)
+- Suggested alternatives (dashed border)
+
+**Edge Types**:
+- Solid line: Direct integration
+- Dashed line: Optional integration
+- Dotted line: Alternative option
+- Arrow direction shows data flow
+
+**Interactions**:
+- Hover node: Highlight connected nodes and edges
+- Click node: Navigate to service details
+- Drag node: Reposition in graph
+- Scroll: Zoom in/out
+- Double-click: Center and focus on node
+
+**Styling**:
+- Nodes: Circular with service icon, shadow on hover
+- Edges: Colored by relationship type
+- Labels: Service names below nodes
+- Background: Subtle grid pattern
+
+### Usage Complexity Meter
+
+**Purpose**: Visual indicator of service difficulty level
+
+**Design**:
+- Horizontal bar meter with 3 segments
+- Color-coded: Green (Beginner), Orange (Intermediate), Red (Advanced)
+- Animated fill on load
+- Icon indicators for each level
+
+**Variants**:
+- Compact: Small bar for cards (40px width)
+- Detailed: Larger bar with labels (120px width)
+- Badge: Pill-shaped badge with text
+
+**Tooltip Content**:
+- Skill level name
+- Required prerequisites
+- Estimated learning time
+- Recommended resources
+
+**Implementation**:
+```html
+<div class="complexity-meter" data-level="intermediate">
+  <div class="complexity-bar">
+    <div class="complexity-fill" style="width: 66%"></div>
+  </div>
+  <span class="complexity-label">Intermediate</span>
+</div>
+```
+
+### Regional Availability Map
+
+**Purpose**: Show geographic availability of AWS services
+
+**Implementation**:
+- SVG world map with clickable regions
+- Color coding for availability status
+- Animated region highlighting
+- Zoom to region on click
+
+**Region States**:
+- Available: Primary color fill
+- Limited: Orange fill with pattern
+- Coming Soon: Gray fill with dashed border
+- Not Available: Light gray, reduced opacity
+
+**Interactions**:
+- Hover region: Show tooltip with service count
+- Click region: Show detailed service list
+- Legend: Toggle region visibility
+- Filter: Show only regions with specific services
+
+**Data Structure**:
+```javascript
+const regionalAvailability = {
+  'us-east-1': {
+    name: 'US East (N. Virginia)',
+    services: ['lambda', 's3', 'ec2', 'rds'],
+    status: 'available'
+  },
+  'eu-west-1': {
+    name: 'EU (Ireland)',
+    services: ['lambda', 's3', 'ec2'],
+    status: 'available'
+  }
+};
+```
+
+### Smart Search Suggestions
+
+**Purpose**: Autocomplete search with rich service information
+
+**Features**:
+- Real-time filtering as user types
+- Fuzzy matching for typos
+- Service icon display
+- Category badges
+- Keyboard navigation (arrow keys, enter, escape)
+
+**Suggestion Item Structure**:
+- Service icon (24x24px)
+- Service name (bold, highlighted match)
+- Category badge
+- Brief description (truncated)
+- Complexity indicator
+
+**Styling**:
+- Dropdown with shadow-lg
+- Hover: Background highlight
+- Selected: Primary color background
+- Max height: 400px with scroll
+- Staggered fade-in animation
+
+**Implementation**:
+```javascript
+const searchSuggestions = {
+  query: 'lambda',
+  results: [
+    {
+      id: 'lambda',
+      name: 'AWS Lambda',
+      icon: 'lambda.svg',
+      category: 'Compute',
+      description: 'Run code without servers',
+      complexity: 'beginner',
+      matchScore: 1.0
+    }
+  ]
+};
+```
+
+### Animated Service Icons
+
+**Purpose**: Add life and interactivity to service cards
+
+**Animation Types**:
+- Hover: Scale 1.1 + rotate 5deg (200ms)
+- Load: Fade in + slide up with stagger (100ms delay per icon)
+- Click: Pulse effect (scale 0.95 -> 1.1 -> 1.0)
+- Active: Continuous subtle float animation
+
+**Performance**:
+- Use CSS transforms for GPU acceleration
+- RequestAnimationFrame for JavaScript animations
+- Lazy load animations for off-screen icons
+- Respect prefers-reduced-motion
+
+**CSS Example**:
+```css
+.service-icon {
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.service-icon.active {
+  animation: float 3s ease-in-out infinite;
+}
+```
+
+### Contextual Tooltips
+
+**Purpose**: Provide rich information on hover without cluttering the UI
+
+**Tooltip Structure**:
+- Header with service name and icon
+- Description text (2-3 lines)
+- Key features list (3-5 bullets)
+- Pricing tier badge
+- "Learn More" link
+
+**Positioning**:
+- Smart positioning to avoid viewport edges
+- Arrow pointing to trigger element
+- Offset: 8px from trigger
+- Max width: 300px
+
+**Animations**:
+- Fade in: 150ms
+- Slide in: 10px from final position
+- Fade out: 100ms with 200ms delay
+- Stagger content: Title -> Description -> Features
+
+**Styling**:
+- Background: White with shadow-xl
+- Border: 1px solid neutral-200
+- Border radius: 8px
+- Padding: 16px
+- Typography: Body small (14px)
+
+**Implementation**:
+```javascript
+const tooltip = {
+  trigger: 'hover',
+  delay: 300,
+  position: 'top',
+  content: {
+    title: 'AWS Lambda',
+    description: 'Run code without provisioning servers',
+    features: ['Auto-scaling', 'Pay per use', 'Event-driven'],
+    pricingTier: 'Free tier available'
+  }
+};
+```
+
+### Smooth Page Transitions
+
+**Purpose**: Create fluid navigation between sections
+
+**Transition Types**:
+
+1. **Fade Transition**:
+   - Exit: Opacity 1 -> 0 (300ms)
+   - Enter: Opacity 0 -> 1 (300ms)
+   - Overlap: 100ms
+
+2. **Slide Transition**:
+   - Exit: TranslateY 0 -> -20px + Opacity 1 -> 0
+   - Enter: TranslateY 20px -> 0 + Opacity 0 -> 1
+   - Duration: 400ms
+
+3. **Scale Transition**:
+   - Exit: Scale 1 -> 0.95 + Opacity 1 -> 0
+   - Enter: Scale 1.05 -> 1 + Opacity 0 -> 1
+   - Duration: 350ms
+
+**Scroll Behavior**:
+- Smooth scroll with easing
+- Offset for sticky header
+- Prevent scroll during transition
+- Update URL hash without page jump
+
+**Implementation**:
+```javascript
+const pageTransition = {
+  duration: 400,
+  easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  exitAnimation: 'slideUp',
+  enterAnimation: 'slideDown',
+  stagger: 50
+};
+```
+
+## Updated Correctness Properties for New Features
+
+Property 58: Cost calculator real-time updates
+*For any* cost calculator slider adjustment, the displayed cost should update within 100ms with smooth number animation
+**Validates: Requirements 21.2**
+
+Property 59: Service graph node highlighting
+*For any* node hover in the service relationship graph, all connected nodes and edges should be highlighted with distinct colors
+**Validates: Requirements 22.2**
+
+Property 60: Complexity meter color coding
+*For any* complexity meter, the color should be green for Beginner, orange for Intermediate, and red for Advanced
+**Validates: Requirements 23.2**
+
+Property 61: Regional map interaction
+*For any* region on the availability map, hovering should display a tooltip with service count and clicking should show detailed information
+**Validates: Requirements 24.2, 24.3**
+
+Property 62: Search suggestion keyboard navigation
+*For any* search suggestion list, arrow keys should navigate through suggestions and Enter should select the highlighted suggestion
+**Validates: Requirements 25.3**
+
+Property 63: Icon animation performance
+*For any* animated service icon, the animation should use CSS transforms and maintain 60fps performance
+**Validates: Requirements 26.4**
+
+Property 64: Tooltip positioning intelligence
+*For any* tooltip, it should position itself to remain fully visible within the viewport, adjusting position if near edges
+**Validates: Requirements 27.2**
+
+Property 65: Page transition smoothness
+*For any* section navigation, the transition should complete within 300-500ms with coordinated fade and slide animations
+**Validates: Requirements 28.1**
+
+## Testing Strategy for New Features
+
+### Cost Calculator Testing
+- Test slider value updates trigger cost recalculation
+- Verify number animations complete smoothly
+- Test free tier calculations are accurate
+- Verify cost breakdown percentages sum to 100%
+
+### Service Graph Testing
+- Test force-directed layout converges to stable state
+- Verify node highlighting works for all connection types
+- Test zoom and pan controls function correctly
+- Verify graph performance with 50+ nodes
+
+### Complexity Meter Testing
+- Test color coding matches difficulty levels
+- Verify tooltip displays correct information
+- Test filtering by complexity level
+- Verify meter animations complete
+
+### Regional Map Testing
+- Test all regions are clickable
+- Verify region highlighting on hover
+- Test service availability data accuracy
+- Verify map responsiveness on mobile
+
+### Search Suggestions Testing
+- Test fuzzy matching finds relevant results
+- Verify keyboard navigation works correctly
+- Test suggestion ranking by relevance
+- Verify icon loading and display
+
+### Icon Animations Testing
+- Test animations respect reduced motion preferences
+- Verify GPU acceleration is used
+- Test animation timing and easing
+- Verify no animation jank or stuttering
+
+### Tooltip Testing
+- Test tooltip positioning near viewport edges
+- Verify tooltip content loads correctly
+- Test tooltip dismiss on mouse leave
+- Verify tooltip z-index management
+
+### Page Transitions Testing
+- Test transition timing and smoothness
+- Verify scroll position is maintained
+- Test transition interruption handling
+- Verify no layout shifts during transitions

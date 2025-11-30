@@ -30,9 +30,11 @@ const RecommendationPanelComponent = {
     show() {
         const section = document.getElementById('recommendation-panel');
         if (section) {
-            section.classList.add('active');
             section.style.display = 'block';
+            section.classList.add('active');
             section.removeAttribute('hidden');
+            section.removeAttribute('style');
+            section.style.display = 'block';
         }
     },
 
@@ -78,21 +80,29 @@ const RecommendationPanelComponent = {
         
         container.innerHTML = `
             <div class="prereq-item">
-                <span class="prereq-icon">⏱️</span>
+                <svg class="prereq-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M8 4V8L11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
                 <div>
                     <div class="prereq-label">Estimated Time</div>
                     <div class="prereq-value">${pattern.estimatedBuildTime || 'N/A'}</div>
                 </div>
             </div>
             <div class="prereq-item">
-                <span class="prereq-icon">📊</span>
+                <svg class="prereq-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 14L6 10L10 12L14 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
                 <div>
                     <div class="prereq-label">Difficulty</div>
                     <div class="prereq-value">${pattern.difficultyLevel || 'N/A'}</div>
                 </div>
             </div>
             <div class="prereq-item">
-                <span class="prereq-icon">📚</span>
+                <svg class="prereq-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 3C2 2.44772 2.44772 2 3 2H13C13.5523 2 14 2.44772 14 3V13C14 13.5523 13.5523 14 13 14H3C2.44772 14 2 13.5523 2 13V3Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M5 7H11M5 10H9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
                 <div>
                     <div class="prereq-label">Required Knowledge</div>
                     <ul class="prereq-list">
@@ -181,8 +191,14 @@ const RecommendationPanelComponent = {
 
         const notes = pattern.securityNotes || [];
         container.innerHTML = notes
-            .map(note => `<div class="security-note">🔒 ${note}</div>`)
-            .join('');
+            .map(note => `
+                <div class="security-note">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 1L11 3V7C11 10 8 13 8 13C8 13 5 10 5 7V3L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    ${note}
+                </div>
+            `).join('');
     },
 
     /**
@@ -197,7 +213,11 @@ const RecommendationPanelComponent = {
         container.innerHTML = resources
             .map(resource => `
                 <a href="${resource.url}" target="_blank" rel="noopener noreferrer" class="learning-link">
-                    ${resource.type === 'video' ? '🎬' : '📄'} ${resource.title}
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 3C2 2.44772 2.44772 2 3 2H13C13.5523 2 14 2.44772 14 3V13C14 13.5523 13.5523 14 13 14H3C2.44772 14 2 13.5523 2 13V3Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M5 6H11M5 9H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    ${resource.title}
                 </a>
             `).join('');
     },
@@ -207,7 +227,13 @@ const RecommendationPanelComponent = {
      */
     scrollTo() {
         const section = document.getElementById('recommendation-panel');
-        section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (section) {
+            section.style.display = 'block';
+            section.classList.add('active');
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
     }
 };
 

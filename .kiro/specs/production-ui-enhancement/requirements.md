@@ -26,6 +26,15 @@ This document outlines the requirements for transforming the AWS Beginner Bluepr
 - **Typography Scale**: A harmonious set of font sizes and weights
 - **Spacing System**: A consistent set of spacing values for layout
 - **Interactive Element**: Any UI component that responds to user input
+- **Cost Calculator**: An interactive widget for estimating AWS service pricing
+- **Service Graph**: A network diagram showing relationships between AWS services
+- **Complexity Meter**: A visual indicator showing service difficulty level
+- **Regional Map**: An interactive world map showing service availability by region
+- **Autocomplete**: A search feature that suggests results as the user types
+- **Tooltip**: A small popup that appears on hover to provide additional information
+- **Page Transition**: An animated effect when navigating between sections
+- **Force-Directed Layout**: A graph layout algorithm that positions nodes based on simulated forces
+- **Fuzzy Matching**: A search algorithm that finds approximate matches for misspelled queries
 
 ## Requirements
 
@@ -280,3 +289,100 @@ This document outlines the requirements for transforming the AWS Beginner Bluepr
 3. WHEN input has an error THEN the System SHALL display it with red borders and shake animations
 4. WHEN input is valid THEN the System SHALL show a success indicator with green accents or checkmarks
 5. WHEN the User views form labels THEN the System SHALL use floating labels that animate on focus or when filled
+
+
+### Requirement 21
+
+**User Story:** As a user, I want an interactive cost calculator widget, so that I can estimate AWS pricing for my specific use case.
+
+#### Acceptance Criteria
+
+1. WHEN the User views a service recommendation THEN the System SHALL display a cost calculator widget with interactive sliders for usage parameters
+2. WHEN the User adjusts slider values THEN the System SHALL update cost estimates in real-time with smooth number transitions
+3. WHEN the User modifies usage parameters THEN the System SHALL display monthly and annual cost projections with visual breakdown charts
+4. WHEN the User views cost estimates THEN the System SHALL show free tier eligibility indicators and cost optimization suggestions
+5. WHEN the User interacts with the calculator THEN the System SHALL provide tooltips explaining each pricing parameter
+
+### Requirement 22
+
+**User Story:** As a user, I want a service relationship graph visualization, so that I can understand how AWS services connect and interact.
+
+#### Acceptance Criteria
+
+1. WHEN the User views a service or pattern THEN the System SHALL display an interactive network diagram showing related services and their connections
+2. WHEN the User hovers over a node in the graph THEN the System SHALL highlight connected services and display relationship types
+3. WHEN the User clicks a node THEN the System SHALL navigate to that service with smooth transition animation
+4. WHEN the graph is complex THEN the System SHALL provide zoom, pan, and filter controls for better navigation
+5. WHEN nodes are displayed THEN the System SHALL use force-directed layout with animated positioning
+
+### Requirement 23
+
+**User Story:** As a user, I want a usage complexity meter, so that I can quickly assess if a service matches my skill level.
+
+#### Acceptance Criteria
+
+1. WHEN the User views any service card THEN the System SHALL display a visual complexity meter showing difficulty rating
+2. WHEN the complexity meter is displayed THEN the System SHALL use color coding with green for Beginner, orange for Intermediate, and red for Advanced
+3. WHEN the User hovers over the complexity meter THEN the System SHALL show a tooltip with detailed skill requirements and learning resources
+4. WHEN multiple services are compared THEN the System SHALL display complexity ratings consistently across all cards
+5. WHEN the User filters services THEN the System SHALL allow filtering by complexity level
+
+### Requirement 24
+
+**User Story:** As a user, I want a regional availability map, so that I can see where AWS services are available geographically.
+
+#### Acceptance Criteria
+
+1. WHEN the User views a service THEN the System SHALL display an interactive world map showing regional availability
+2. WHEN the User hovers over a region THEN the System SHALL highlight it and display available services in that region
+3. WHEN the User clicks a region THEN the System SHALL show detailed information about service availability and regional pricing differences
+4. WHEN the map loads THEN the System SHALL animate regions with staggered fade-in effects
+5. WHEN services have limited availability THEN the System SHALL use visual indicators to show which regions support the service
+
+### Requirement 25
+
+**User Story:** As a user, I want smart search suggestions with autocomplete, so that I can quickly find services without typing full names.
+
+#### Acceptance Criteria
+
+1. WHEN the User types in the search input THEN the System SHALL display autocomplete suggestions with matching service names and icons
+2. WHEN suggestions are displayed THEN the System SHALL show service icons, names, categories, and brief descriptions
+3. WHEN the User navigates suggestions with keyboard THEN the System SHALL highlight the selected suggestion with visual feedback
+4. WHEN the User selects a suggestion THEN the System SHALL navigate to that service with the search term highlighted
+5. WHEN no matches are found THEN the System SHALL suggest similar services or alternative search terms
+
+### Requirement 26
+
+**User Story:** As a user, I want animated service icons, so that the interface feels more dynamic and engaging.
+
+#### Acceptance Criteria
+
+1. WHEN the User hovers over a service card THEN the System SHALL animate the service icon with subtle scale, rotate, or bounce effects
+2. WHEN service cards load THEN the System SHALL animate icons with staggered entrance effects
+3. WHEN the User clicks a service icon THEN the System SHALL provide click feedback with pulse or ripple animation
+4. WHEN icons are displayed THEN the System SHALL use SVG animations with smooth 60fps performance
+5. WHEN the User has reduced motion preferences THEN the System SHALL disable icon animations
+
+### Requirement 27
+
+**User Story:** As a user, I want contextual tooltips with rich information, so that I can learn about services without leaving the current page.
+
+#### Acceptance Criteria
+
+1. WHEN the User hovers over any service element THEN the System SHALL display a rich tooltip with service description, use cases, and pricing tier
+2. WHEN tooltips appear THEN the System SHALL animate them with fade-in and slide effects positioned intelligently to avoid viewport edges
+3. WHEN the User moves the cursor away THEN the System SHALL hide the tooltip with fade-out animation after a 200ms delay
+4. WHEN tooltips contain links or buttons THEN the System SHALL allow interaction without dismissing the tooltip
+5. WHEN multiple tooltips could appear THEN the System SHALL show only one tooltip at a time with proper z-index management
+
+### Requirement 28
+
+**User Story:** As a user, I want smooth page transitions between sections, so that navigation feels fluid and professional.
+
+#### Acceptance Criteria
+
+1. WHEN the User navigates between sections THEN the System SHALL apply fade and slide animations with 300-500ms duration
+2. WHEN content exits the view THEN the System SHALL fade out and slide up the current content
+3. WHEN new content enters the view THEN the System SHALL fade in and slide down the new content with staggered element animations
+4. WHEN the User clicks navigation links THEN the System SHALL scroll smoothly to the target section with easing
+5. WHEN transitions occur THEN the System SHALL maintain scroll position context and prevent layout shifts

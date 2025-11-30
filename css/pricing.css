@@ -1,0 +1,192 @@
+/* Pricing Calculator Styles */
+.pricing-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #ff9900;
+}
+
+.pricing-section h4 {
+    margin: 0 0 15px 0;
+    color: #232f3e;
+    font-size: 18px;
+}
+
+.free-tier {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.free-tier-badge {
+    background: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.free-tier p {
+    margin: 8px 0 0 0;
+    font-size: 14px;
+    color: #155724;
+}
+
+.pricing-tiers {
+    margin-bottom: 20px;
+}
+
+.pricing-tier {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: white;
+}
+
+.tier-info strong {
+    display: block;
+    color: #232f3e;
+    font-size: 14px;
+}
+
+.tier-description {
+    color: #6c757d;
+    font-size: 12px;
+}
+
+.tier-price {
+    font-weight: bold;
+    color: #ff9900;
+    font-size: 14px;
+}
+
+.cost-calculator {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 15px;
+}
+
+.cost-calculator h5 {
+    margin: 0 0 12px 0;
+    color: #232f3e;
+    font-size: 16px;
+}
+
+.calculator-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.tier-select,
+.usage-input {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 120px;
+}
+
+.tier-select:focus,
+.usage-input:focus {
+    outline: none;
+    border-color: #ff9900;
+    box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.2);
+}
+
+.calculate-btn {
+    background: #ff9900;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.calculate-btn:hover {
+    background: #e88900;
+}
+
+.cost-result {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.cost-estimate {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.cost-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.cost-period {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.pricing-disclaimer {
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+.pricing-disclaimer small {
+    color: #6c757d;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pricing-disclaimer a {
+    color: #ff9900;
+    text-decoration: none;
+}
+
+.pricing-disclaimer a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pricing-tier {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .calculator-inputs {
+        flex-direction: column;
+    }
+    
+    .tier-select,
+    .usage-input,
+    .calculate-btn {
+        width: 100%;
+    }
+}

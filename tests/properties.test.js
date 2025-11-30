@@ -223,9 +223,46 @@ describe('AWS Beginner Blueprint - Property-Based Tests', () => {
             const serialized = JSON.stringify(knowledgeBase);
             const deserialized = JSON.parse(serialized);
             
+            // Verify structure is preserved
+            expect(deserialized.version).toBe(knowledgeBase.version);
             expect(deserialized.services.length).toBe(knowledgeBase.services.length);
             expect(deserialized.patterns.length).toBe(knowledgeBase.patterns.length);
             expect(deserialized.trendingTopics.length).toBe(knowledgeBase.trendingTopics.length);
+            expect(deserialized.categories.length).toBe(knowledgeBase.categories.length);
+            
+            // Deep equality check on a sample of services
+            for (let i = 0; i < Math.min(5, knowledgeBase.services.length); i++) {
+                expect(deserialized.services[i]).toEqual(knowledgeBase.services[i]);
+            }
+            
+            // Deep equality check on a sample of patterns
+            for (let i = 0; i < Math.min(3, knowledgeBase.patterns.length); i++) {
+                expect(deserialized.patterns[i]).toEqual(knowledgeBase.patterns[i]);
+            }
+        });
+
+        test('round-trip serialization preserves all data', () => {
+            fc.assert(
+                fc.property(
+                    fc.constantFrom(...Array.from({length: Math.min(10, knowledgeBase.services.length)}, (_, i) => i)),
+                    (index) => {
+                        const service = knowledgeBase.services[index];
+                        const serialized = JSON.stringify(service);
+                        const deserialized = JSON.parse(serialized);
+                        
+                        // All fields should be preserved
+                        expect(deserialized.id).toBe(service.id);
+                        expect(deserialized.name).toBe(service.name);
+                        expect(deserialized.category).toBe(service.category);
+                        expect(deserialized.hasFreeTier).toBe(service.hasFreeTier);
+                        expect(deserialized.tags).toEqual(service.tags);
+                        expect(deserialized.intentKeywords).toEqual(service.intentKeywords);
+                        
+                        return true;
+                    }
+                ),
+                { numRuns: 100 }
+            );
         });
     });
 

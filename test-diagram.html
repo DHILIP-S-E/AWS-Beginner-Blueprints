@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Generator Test</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/diagram-generator.css">
+</head>
+<body>
+    <div style="padding: 2rem;">
+        <h1>Diagram Generator Test</h1>
+        
+        <!-- Test Prerequisites Section -->
+        <div class="card prerequisites-card" style="max-width: 600px; margin: 2rem 0;">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Prerequisites</h3>
+            </div>
+            <div class="prerequisites-content">
+                <div class="prerequisite-list">
+                    <div class="prerequisite-item">
+                        <div class="prerequisite-icon">✓</div>
+                        <div class="prerequisite-text">
+                            <strong>AWS Account</strong>
+                            <span>Free tier eligible account required</span>
+                        </div>
+                    </div>
+                    <div class="prerequisite-item">
+                        <div class="prerequisite-icon">✓</div>
+                        <div class="prerequisite-text">
+                            <strong>Basic Knowledge</strong>
+                            <span>Understanding of cloud concepts</span>
+                        </div>
+                    </div>
+                    <div class="prerequisite-item">
+                        <div class="prerequisite-icon">✓</div>
+                        <div class="prerequisite-text">
+                            <strong>Development Tools</strong>
+                            <span>Code editor and terminal access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Diagram Generator Button -->
+        <button id="diagram-generator-btn" class="btn btn-primary" style="margin: 1rem 0;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 3H14V13H2V3Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M5 6H11M5 8H9M5 10H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Open Diagram Generator
+        </button>
+    </div>
+
+    <!-- Diagram Generator Modal -->
+    <div class="modal" id="diagram-modal" role="dialog" aria-labelledby="diagram-title" aria-hidden="true">
+        <div class="modal-overlay" id="diagram-modal-overlay"></div>
+        <div class="modal-content diagram-modal-content">
+            <button class="modal-close" id="diagram-modal-close" aria-label="Close modal">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect width="48" height="48" rx="12" fill="url(#diagramGradient)"/>
+                        <path d="M12 18H36V30H12V18Z" stroke="white" stroke-width="2" fill="none"/>
+                        <path d="M18 24H30M18 27H24" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="diagramGradient" x1="0" y1="0" x2="48" y2="48">
+                                <stop stop-color="#667eea"/>
+                                <stop offset="1" stop-color="#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 id="diagram-title">Architecture Diagram Generator</h2>
+                <p class="modal-subtitle">Create custom AWS architecture diagrams</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="diagram-generator">
+                    <div class="generator-section">
+                        <h3>Select Services</h3>
+                        <div class="service-selector">
+                            <div class="service-categories">
+                                <button class="category-btn active" data-category="compute">Compute</button>
+                                <button class="category-btn" data-category="storage">Storage</button>
+                                <button class="category-btn" data-category="database">Database</button>
+                                <button class="category-btn" data-category="networking">Networking</button>
+                            </div>
+                            <div class="service-grid" id="diagram-service-grid">
+                                <!-- Services will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="generator-section">
+                        <h3>Selected Services</h3>
+                        <div class="selected-services" id="selected-services">
+                            <div class="empty-state">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                    <circle cx="24" cy="24" r="20" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4"/>
+                                    <path d="M24 16V32M16 24H32" stroke="#cbd5e0" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <p>Select services to add to your diagram</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="generator-section">
+                        <h3>Generated Diagram</h3>
+                        <div class="diagram-preview" id="diagram-preview">
+                            <div class="preview-placeholder">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <rect x="8" y="16" width="48" height="32" rx="4" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4"/>
+                                    <path d="M20 28H44M20 32H36M20 36H28" stroke="#cbd5e0" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <p>Your diagram will appear here</p>
+                            </div>
+                        </div>
+                        <div class="diagram-actions">
+                            <button class="btn btn-secondary" id="generate-diagram-btn" disabled>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M8 1V15M1 8H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Generate Diagram
+                            </button>
+                            <button class="btn btn-primary" id="export-diagram-btn" disabled>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5.33333 6.66667L8 4L10.6667 6.66667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 4V10" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Export PNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/diagram-generator.js"></script>
+</body>
+</html>
